@@ -61,7 +61,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="473" />
     <option name="y" value="-9" />
     <option name="width" value="1048" />
@@ -86,6 +86,11 @@
               <item name="ustest-test" type="b2602c69:ProjectViewProjectNode" />
               <item name="ustest-test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ustest-test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ustest-test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="ustest-test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ustest-test" type="b2602c69:ProjectViewProjectNode" />
@@ -126,8 +131,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20788912" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
