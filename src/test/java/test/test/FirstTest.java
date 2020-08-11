@@ -39,7 +39,7 @@ public class FirstTest {
     @Test
     public void first() {
         driver.get("http://tos2.solvo.ru:37580/aet/login.xhtml");
-        driver.manage().window().setSize(new Dimension(965, 879));
+        driver.manage().window().setSize(new Dimension(900, 900));
         driver.findElement(By.id("LoginForm:userid")).click();
         driver.findElement(By.id("LoginForm:userid")).sendKeys("olegatorw");
         driver.findElement(By.id("LoginForm:password")).sendKeys("123");
@@ -47,6 +47,8 @@ public class FirstTest {
         driver.findElement(By.id("LoginForm:language_label")).click();
         driver.findElement(By.id("LoginForm:language_0")).click();
         driver.findElement(By.cssSelector(".ui-button-text:nth-child(2)")).click();
-        driver.close();
+
+        //driver.close();
+        driver.quit();
     }
 }
