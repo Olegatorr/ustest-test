@@ -11,6 +11,10 @@ repositories {
     mavenCentral()
 }
 
+test {
+    useTestNG()
+}
+
 dependencies {
     // https://mvnrepository.com/artifact/org.testng/testng
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
