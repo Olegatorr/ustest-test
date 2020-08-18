@@ -1,57 +1,18 @@
 package test.test;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import java.util.HashMap;
+
 import java.util.Map;
 
-public class FirstTest {
+public class MakeBoLWithGC extends TestMain{
+
     private WebDriver driver;
     private Map<String, Object> vars;
     JavascriptExecutor js;
 
-    @BeforeTest
-    public void setUp() {
-        driver = new FirefoxDriver();
-        js = (JavascriptExecutor) driver;
-        vars = new HashMap<String, Object>();
-//        driver.manage().window().setSize(new Dimension(1936, 1066));
-//        login();
-    }
-
-    @AfterTest
-    public void tearDown() {
-        driver.quit();
-    }
-
-    @Test(priority = 1)
-    public void login() {
-        driver.get("http://tos2.solvo.ru:37580/aet/login.xhtml");
-//        driver.manage().window().setSize(new Dimension(1936, 1066));
-        driver.findElement(By.id("LoginForm:userid")).click();
-        driver.findElement(By.id("LoginForm:userid")).sendKeys("ROBOTESTER");
-        driver.findElement(By.id("LoginForm:password")).sendKeys("ELECTROSTALIN");
-        driver.findElement(By.id("LoginForm:language")).click();
-        driver.findElement(By.id("LoginForm:language_label")).click();
-        driver.findElement(By.id("LoginForm:language_0")).click();
-        driver.findElement(By.cssSelector(".ui-button-text:nth-child(2)")).click();
-
-        try{
-            {
-                WebElement element = driver.findElement(By.cssSelector("#duplicateLoginForm\\3A duplicateLoginYesBtn > .ui-button-text"));
-                Actions builder = new Actions(driver);
-                builder.moveToElement(element).perform();
-            }
-            driver.findElement(By.cssSelector("#duplicateLoginForm\\3A duplicateLoginYesBtn > .ui-button-text")).click();
-        }catch (Exception e){
-            System.out.println("There was no active login");
-        }
-    }
-    @Test(priority = 2)
+    @Test
     public void makeBoLWithGC() {
         driver.get("http://tos2.solvo.ru:37580/aet/private/bill_of_lading.xhtml?id=1014241");
         //driver.findElement(By.linkText("Processing")).click(); // TODO: Examine why tf it isn't working
@@ -193,4 +154,11 @@ public class FirstTest {
         }
         driver.findElement(By.cssSelector(".ui-state-hover > .ui-menuitem-text")).click();
     }
+
+
+
+
 }
+
+
+
