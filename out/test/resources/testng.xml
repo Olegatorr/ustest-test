@@ -3,7 +3,12 @@
 <suite name="Suite1" verbose="1" >
     <test name="FirstTest" >
         <classes>
-            <class name="test.test.FirstTest" />
+            <class name="test.test.Login" />
+        </classes>
+    </test>
+    <test name="SecondTest" >
+        <classes>
+            <class name="test.test.MakeBoLWithGC" />
         </classes>
     </test>
 
