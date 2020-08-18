@@ -8,10 +8,6 @@ import java.util.Map;
 
 public class MakeBoLWithGC extends TestMain{
 
-    private WebDriver driver;
-    private Map<String, Object> vars;
-    JavascriptExecutor js;
-
     @Test
     public void makeBoLWithGC() {
         driver.get("http://tos2.solvo.ru:37580/aet/private/bill_of_lading.xhtml?id=1014241");

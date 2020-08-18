@@ -7,9 +7,6 @@ import org.testng.annotations.Test;
 import java.util.Map;
 
 public class Login extends TestMain{
-    private WebDriver driver;
-    private Map<String, Object> vars;
-    JavascriptExecutor js;
 
     @Test
     public void login() {
@@ -30,6 +27,7 @@ public class Login extends TestMain{
                 builder.moveToElement(element).perform();
             }
             driver.findElement(By.cssSelector("#duplicateLoginForm\\3A duplicateLoginYesBtn > .ui-button-text")).click();
+            System.out.println("There was active login");
         }catch (Exception e){
             System.out.println("There was no active login");
         }

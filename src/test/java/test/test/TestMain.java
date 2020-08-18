@@ -11,8 +11,8 @@ import java.util.Map;
 
 public class TestMain {
 
-    private WebDriver driver;
-    private Map<String, Object> vars;
+    public WebDriver driver;
+    public Map<String, Object> vars;
     JavascriptExecutor js;
 
     @BeforeTest
