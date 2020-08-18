@@ -6,5 +6,10 @@
             <class name="test.test.Login" />
         </classes>
     </test>
+    <test name="SecondTest" >
+        <classes>
+            <class name="test.test.MakeBoLWithGC" />
+        </classes>
+    </test>
 
 </suite>

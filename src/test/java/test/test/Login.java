@@ -2,14 +2,29 @@ package test.test;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 
 import java.util.Map;
 
 public class Login extends TestMain{
 
+    @BeforeTest
+    public void setUp() {
+        super.setUp();
+    }
+
+    @AfterTest
+    public void tearDown() {
+        super.tearDown();
+    }
+
     @Test
     public void login() {
+        //driver = getDriverInstance();
+
         driver.get("http://tos2.solvo.ru:37580/aet/login.xhtml");
         driver.manage().window().setSize(new Dimension(1800, 1000));
         driver.findElement(By.id("LoginForm:userid")).click();
@@ -30,6 +45,14 @@ public class Login extends TestMain{
             System.out.println("There was active login");
         }catch (Exception e){
             System.out.println("There was no active login");
+        }
+
+        driver.get("http://tos2.solvo.ru:37580/aet/private/main.xhtml");
+        if(driver.getCurrentUrl().endsWith("main.xhtml")){
+            System.out.println("SUCCESS");
+        }else{
+            System.out.println("FAILURE");
+            Assert.fail();
         }
     }
 }

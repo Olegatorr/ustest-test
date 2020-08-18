@@ -3,13 +3,26 @@ package test.test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 
 import java.util.Map;
 
 public class MakeBoLWithGC extends TestMain{
 
+    @BeforeTest
+    public void setUp() {
+        super.setUp();
+    }
+
+    @AfterTest
+    public void tearDown() {
+        super.tearDown();
+    }
+
     @Test
     public void makeBoLWithGC() {
+
         driver.get("http://tos2.solvo.ru:37580/aet/private/bill_of_lading.xhtml?id=1014241");
         //driver.findElement(By.linkText("Processing")).click(); // TODO: Examine why tf it isn't working
         //driver.findElement(By.linkText("Cargo")).click();
