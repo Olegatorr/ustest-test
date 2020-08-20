@@ -1,16 +1,6 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite1" verbose="1" >
-    <test name="test_1" >
-        <classes>
-            <class name="test.test.Login" />
-        </classes>
-    </test>
-    <test name="test_2" >
-        <classes>
-            <class name="test.test.MakeBoLWithGC" />
-        </classes>
-    </test>
     <test name="Test_3" >
         <classes>
             <class name="step.by.step.LoginTest" />

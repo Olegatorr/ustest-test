@@ -7,13 +7,17 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class MakeBoLWithGC2 extends TestBase{
 
     @Test
     public void makeBoLWithGC() { // TODO: strip down some methods
+
         goToMainPage();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//form/div/div/div/ul/li/a/span")));
+
+        /*wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//form/div/div/div/ul/li/a/span"))); // TODO: Wrong xpath
         driver.findElement(By.xpath("//form/div/div/div/ul/li/a/span")).click();
         driver.findElement(By.xpath("//form/div/div/div/ul/li/ul/li[2]/a/span")).click();
         driver.findElement(By.id("vessel_vizit:toolbarForm:quickFilter")).click();
@@ -23,11 +27,17 @@ public class MakeBoLWithGC2 extends TestBase{
         driver.findElement(By.xpath("//span[contains(.,\'1014241\')]")).click();
         driver.findElement(By.linkText("Cargo")).click();
         driver.findElement(By.xpath("//h3[contains(.,\'Bill of Lading\')]")).click();
-        //driver.findElement(By.linkText("Processing")).click(); // TODO: Examine why tf it isn't working
-        //driver.findElement(By.linkText("Cargo")).click();
+        */
+
+        driver.get("http://tos2.solvo.ru:37580/aet/private/vessel_oper_vessel_vizit/view.xhtml?id=1014241");
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Cargo")));
+        driver.findElement(By.linkText("Cargo")).click();
         //driver.findElement(By.cssSelector(".ui-md-12:nth-child(1) .present-card-header")).click();
 
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Bill of Ladings")));
         driver.findElement(By.linkText("Bill of Ladings")).click();
+
         {
             WebElement element = driver.findElement(By.linkText("Bill of Ladings"));
             Actions builder = new Actions(driver);

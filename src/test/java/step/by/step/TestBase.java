@@ -12,28 +12,43 @@ import org.testng.annotations.BeforeTest;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class TestBase {
     public WebDriver driver;
     public Map<String, Object> vars;
     JavascriptExecutor js;
-    final Wait<WebDriver> wait = new WebDriverWait(driver, 5, 1000); // TODO: check wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS)
+    public Wait<WebDriver> wait;
 
     @BeforeTest
     public void setUp() {
+
+    }
+
+    @BeforeMethod
+    public void beforeMethod() {
         driver = new FirefoxDriver();
         js = (JavascriptExecutor) driver;
         vars = new HashMap<String, Object>();
+        wait = new WebDriverWait(driver, 5, 1000); // TODO: check wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS)
         login(new LoginData("ROBOTESTER", "ELECTROSTALIN"));
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
+
+    @AfterMethod
+    public void afterMethod() {
+        driver.quit();
     }
 
     @AfterTest
-    public void tearDown() {
-        driver.quit();
+    public void tearDown(){
+
     }
 
     protected void login(LoginData loginData) {
         driver.get("http://tos2.solvo.ru:37580/aet/login.xhtml");
+        System.out.println("login form goto");
         driver.manage().window().setSize(new Dimension(1800, 1000));
         driver.findElement(By.id("LoginForm:userid")).click();
         driver.findElement(By.id("LoginForm:userid")).sendKeys(loginData.getRobotester());
