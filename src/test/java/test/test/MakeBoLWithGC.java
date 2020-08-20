@@ -27,6 +27,7 @@ public class MakeBoLWithGC extends TestMain{
         //driver.findElement(By.linkText("Processing")).click(); // TODO: Examine why tf it isn't working
         //driver.findElement(By.linkText("Cargo")).click();
         //driver.findElement(By.cssSelector(".ui-md-12:nth-child(1) .present-card-header")).click();
+
         driver.findElement(By.linkText("Bill of Ladings")).click();
         {
             WebElement element = driver.findElement(By.linkText("Bill of Ladings"));
