@@ -2,6 +2,9 @@ package test.test;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.annotations.AfterTest;
@@ -54,5 +57,7 @@ public class Login extends TestMain{
             System.out.println("FAILURE");
             Assert.fail();
         }
+//        final Wait<WebDriver> wait = new WebDriverWait(driver, 8, 1000);
+//        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".worker-avatar-clip")));
     }
 }

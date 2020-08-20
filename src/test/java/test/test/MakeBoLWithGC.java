@@ -2,6 +2,9 @@ package test.test;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -22,8 +25,18 @@ public class MakeBoLWithGC extends TestMain{
 
     @Test
     public void makeBoLWithGC() {
-
-        driver.get("http://tos2.solvo.ru:37580/aet/private/bill_of_lading.xhtml?id=1014241");
+        driver.get("http://tos2.solvo.ru:37580/aet/private/main.xhtml");
+        final Wait<WebDriver> wait = new WebDriverWait(driver, 5, 1000);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//form/div/div/div/ul/li/a/span")));
+        driver.findElement(By.xpath("//form/div/div/div/ul/li/a/span")).click();
+        driver.findElement(By.xpath("//form/div/div/div/ul/li/ul/li[2]/a/span")).click();
+        driver.findElement(By.id("vessel_vizit:toolbarForm:quickFilter")).click();
+        driver.findElement(By.id("vessel_vizit:toolbarForm:quickFilter")).sendKeys("grande buenos aires");
+        driver.findElement(By.id("vessel_vizit:toolbarForm:quickFilter")).sendKeys(Keys.ENTER);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(.,\'1014241\')]")));
+        driver.findElement(By.xpath("//span[contains(.,\'1014241\')]")).click();
+        driver.findElement(By.linkText("Cargo")).click();
+        driver.findElement(By.xpath("//h3[contains(.,\'Bill of Lading\')]")).click();
         //driver.findElement(By.linkText("Processing")).click(); // TODO: Examine why tf it isn't working
         //driver.findElement(By.linkText("Cargo")).click();
         //driver.findElement(By.cssSelector(".ui-md-12:nth-child(1) .present-card-header")).click();
