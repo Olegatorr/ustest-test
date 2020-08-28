@@ -15,7 +15,10 @@ public class MakeBoLWithGC2 extends TestBase{
     @Test
     public void makeBoLWithGC() { // TODO: strip down some methods
 
-        goToMainPage();
+        //driver = getWebDriver();
+
+        driver.get("http://tos2.solvo.ru:37580/aet/private/main.xhtml");
+        //goToMainPage();
 
         /*wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//form/div/div/div/ul/li/a/span"))); // TODO: Wrong xpath
         driver.findElement(By.xpath("//form/div/div/div/ul/li/a/span")).click();

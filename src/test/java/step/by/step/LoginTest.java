@@ -1,5 +1,6 @@
 package step.by.step;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -9,17 +10,17 @@ public class LoginTest extends TestBase{
     public void test() {
 
         //login is in BeforeTest, no need to call (for now)
-
+        login(new LoginData("ROBOTESTER", "ELECTROSTALIN"));
         goToMainPage();
+        wait.until(WebDriver::getTitle)
 
-        if(driver.getCurrentUrl().endsWith("main.xhtml")){
+        if(driver.getCurrentUrl().endsWith("aet/private/main.xhtml")){ // TODO: make it slow (now - too fast)
             System.out.println("SUCCESS");
         }else{
             System.out.println("FAILURE");
             Assert.fail();
         }
     }
-
 }
 
 

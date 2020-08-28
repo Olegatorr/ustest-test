@@ -5,50 +5,56 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 
+import java.sql.Driver;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class TestBase {
+
     public WebDriver driver;
     public Map<String, Object> vars;
     JavascriptExecutor js;
     public Wait<WebDriver> wait;
+    DriverData driverData = DriverData.getInstance();
 
-    @BeforeTest
+    @BeforeSuite
     public void setUp() {
+        System.out.println("setup");
 
+        //DriverData driverData = DriverData.getInstance();
+
+        driver = driverData.getDriver();
+        wait = driverData.getWait();
+
+        //driver = new FirefoxDriver();
+        //js = (JavascriptExecutor) driver;
+        //vars = new HashMap<String, Object>();
+        //wait = new WebDriverWait(driver, 5, 1000); // TODO: check wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS)
+
+        //login(new LoginData("ROBOTESTER", "ELECTROSTALIN"));
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     @BeforeMethod
-    public void beforeMethod() {
-        driver = new FirefoxDriver();
-        js = (JavascriptExecutor) driver;
-        vars = new HashMap<String, Object>();
-        wait = new WebDriverWait(driver, 5, 1000); // TODO: check wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS)
-        login(new LoginData("ROBOTESTER", "ELECTROSTALIN"));
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    public void beforeMethod(){
+        System.out.println("beforeMethod");
+        driver = driverData.getDriver();
+        wait = driverData.getWait();
     }
 
-
-    @AfterMethod
-    public void afterMethod() {
+    @AfterSuite
+    public void tearDown(){
+        System.out.println("tearDown");
         driver.quit();
     }
 
-    @AfterTest
-    public void tearDown(){
-
-    }
-
     protected void login(LoginData loginData) {
+
+        System.out.println("login");
         driver.get("http://tos2.solvo.ru:37580/aet/login.xhtml");
-        System.out.println("login form goto");
         driver.manage().window().setSize(new Dimension(1800, 1000));
         driver.findElement(By.id("LoginForm:userid")).click();
         driver.findElement(By.id("LoginForm:userid")).sendKeys(loginData.getRobotester());
@@ -74,4 +80,5 @@ public class TestBase {
     protected void goToMainPage() {
         driver.get("http://tos2.solvo.ru:37580/aet/private/main.xhtml");
     }
+
 }
