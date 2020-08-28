@@ -18,31 +18,23 @@ public class TestBase {
     public Map<String, Object> vars;
     JavascriptExecutor js;
     public Wait<WebDriver> wait;
+
     DriverData driverData = DriverData.getInstance();
 
     @BeforeSuite
     public void setUp() {
         System.out.println("setup");
-
-        //DriverData driverData = DriverData.getInstance();
-
-        driver = driverData.getDriver();
-        wait = driverData.getWait();
-
-        //driver = new FirefoxDriver();
-        //js = (JavascriptExecutor) driver;
-        //vars = new HashMap<String, Object>();
-        //wait = new WebDriverWait(driver, 5, 1000); // TODO: check wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS)
-
-        //login(new LoginData("ROBOTESTER", "ELECTROSTALIN"));
+        driver = driverData.driver;
+        wait = driverData.wait;
+        login(new LoginData("ROBOTESTER", "ELECTROSTALIN"));
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     @BeforeMethod
     public void beforeMethod(){
         System.out.println("beforeMethod");
-        driver = driverData.getDriver();
-        wait = driverData.getWait();
+        driver = driverData.driver;
+        wait = driverData.wait;
     }
 
     @AfterSuite
@@ -54,6 +46,7 @@ public class TestBase {
     protected void login(LoginData loginData) {
 
         System.out.println("login");
+
         driver.get("http://tos2.solvo.ru:37580/aet/login.xhtml");
         driver.manage().window().setSize(new Dimension(1800, 1000));
         driver.findElement(By.id("LoginForm:userid")).click();

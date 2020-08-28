@@ -20,7 +20,8 @@ public class MakeBoLWithGC2 extends TestBase{
         driver.get("http://tos2.solvo.ru:37580/aet/private/main.xhtml");
         //goToMainPage();
 
-        /*wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//form/div/div/div/ul/li/a/span"))); // TODO: Wrong xpath
+        /*
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//form/div/div/div/ul/li/a/span"))); // TODO: Wrong xpath
         driver.findElement(By.xpath("//form/div/div/div/ul/li/a/span")).click();
         driver.findElement(By.xpath("//form/div/div/div/ul/li/ul/li[2]/a/span")).click();
         driver.findElement(By.id("vessel_vizit:toolbarForm:quickFilter")).click();

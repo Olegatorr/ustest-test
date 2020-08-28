@@ -1,6 +1,9 @@
 package step.by.step;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -9,16 +12,15 @@ public class LoginTest extends TestBase{
     @Test
     public void test() {
 
-        //login is in BeforeTest, no need to call (for now)
-        login(new LoginData("ROBOTESTER", "ELECTROSTALIN"));
         goToMainPage();
-        wait.until(WebDriver::getTitle)
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".worker-avatar-clip")));
 
-        if(driver.getCurrentUrl().endsWith("aet/private/main.xhtml")){ // TODO: make it slow (now - too fast)
+        if(driver.getCurrentUrl().endsWith("aet/private/main.xhtml")){
             System.out.println("SUCCESS");
+            Assert.assertTrue(true);
         }else{
             System.out.println("FAILURE");
-            Assert.fail();
+            Assert.assertTrue(false);
         }
     }
 }
