@@ -21,19 +21,20 @@ public class DriverData {
         driver = new FirefoxDriver();
         js = (JavascriptExecutor) driver;
         vars = new HashMap<String, Object>();
-        wait = new WebDriverWait(driver, 5, 1000); // TODO: check wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS)
-
-        System.out.println("DriverData initialized");
+        wait = new WebDriverWait(driver, 5, 1000);
     }
 
+    //return driver object
     public WebDriver getDriver(){
         return this.driver;
     }
 
+    //return wait object
     public Wait<WebDriver> getWait(){
         return this.wait;
     }
 
+    //singleton DriverData initialization
     public static DriverData getInstance() {
         if (instance == null) {
             instance = new DriverData();

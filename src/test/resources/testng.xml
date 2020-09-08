@@ -8,7 +8,7 @@
     </test>
     <test name="Test_4" >
         <classes>
-            <class name="step.by.step.MakeBoLWithGC2" />
+            <class name="step.by.step.RwTrainVizitTests" />
         </classes>
     </test>
 

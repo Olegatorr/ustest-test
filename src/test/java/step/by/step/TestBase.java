@@ -1,14 +1,12 @@
 package step.by.step;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
-import java.sql.Driver;
-import java.util.HashMap;
+import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -19,33 +17,33 @@ public class TestBase {
     JavascriptExecutor js;
     public Wait<WebDriver> wait;
 
+    // get singleton driver class instance
     DriverData driverData = DriverData.getInstance();
 
+    // runs once before ALL the tests
     @BeforeSuite
     public void setUp() {
-        System.out.println("setup");
         driver = driverData.driver;
         wait = driverData.wait;
         login(new LoginData("ROBOTESTER", "ELECTROSTALIN"));
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
+    // runs before every @Test-annotated method
     @BeforeMethod
     public void beforeMethod(){
-        System.out.println("beforeMethod");
         driver = driverData.driver;
         wait = driverData.wait;
     }
 
+    // runs after ALL the tests
     @AfterSuite
     public void tearDown(){
-        System.out.println("tearDown");
         driver.quit();
     }
 
+    // login to 7.1 EE
     protected void login(LoginData loginData) {
-
-        System.out.println("login");
 
         driver.get("http://tos2.solvo.ru:37580/aet/login.xhtml");
         driver.manage().window().setSize(new Dimension(1800, 1000));
@@ -57,6 +55,7 @@ public class TestBase {
         driver.findElement(By.id("LoginForm:language_0")).click();
         driver.findElement(By.cssSelector(".ui-button-text:nth-child(2)")).click();
 
+        //in case of an existing active login we need to confirm login
         try{
             {
                 WebElement element = driver.findElement(By.cssSelector("#duplicateLoginForm\\3A duplicateLoginYesBtn > .ui-button-text"));
@@ -68,10 +67,54 @@ public class TestBase {
         }catch (Exception e){
             System.out.println("There was no active login");
         }
+
+        //then wait for redirection to the main page to happen
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".worker-avatar-clip")));
     }
 
+    // go to 7.1 EE main page
     protected void goToMainPage() {
         driver.get("http://tos2.solvo.ru:37580/aet/private/main.xhtml");
     }
 
+    // go to 7.1 Railcar Marshaling
+    protected void goToRailcarMarshaling(){
+        driver.findElement(By.cssSelector("#menuform\\3Aj_idt36_2 span:nth-child(2)")).click();
+        driver.findElement(By.cssSelector("#menuform\\3Aj_idt36_2_0 span")).click();
+    }
+
+    // clink on "create new" button. Seems universal. TODO: check if universal
+    protected void clickNew(){
+        driver.findElement(By.cssSelector(".new")).click();
+    }
+
+    protected void RWTrainVizitFillName(String name){
+        driver.findElement(By.id("RwTrainVizitEditForm:name")).click();
+        // TODO: generate unique marshaling name
+        driver.findElement(By.id("RwTrainVizitEditForm:name")).sendKeys(name);
+    }
+
+    protected void RWTrainVizitFillRWTrack(String track){
+        driver.findElement(By.id("RwTrainVizitEditForm:way:ac_input")).click();
+        driver.findElement(By.id("RwTrainVizitEditForm:way:ac_input")).sendKeys(track);
+        driver.findElement(By.cssSelector("td:nth-child(1)")).click();
+    }
+
+    protected void RWTrainVizitFillDate(String date){
+        driver.findElement(By.id("RwTrainVizitEditForm:prepareDate_input")).click();
+        driver.findElement(By.id("RwTrainVizitEditForm:prepareDate_input")).sendKeys(date);
+    }
+
+    protected void RWTrainVizitFillComment(@Nullable String comment){
+        try{
+            driver.findElement(By.id("RwTrainVizitEditForm:prepareDate_input")).click();
+            driver.findElement(By.id("RwTrainVizitEditForm:prepareDate_input")).sendKeys(comment);
+        }catch (NullPointerException e){
+            System.out.println("Comment was empty");
+        }
+    }
+
+    protected void RWTrainVizitSave(){
+        driver.findElement(By.id("RwTrainVizitEditForm:editSaveBtn")).click();
+    }
 }
