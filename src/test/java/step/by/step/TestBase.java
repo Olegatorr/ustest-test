@@ -2,11 +2,13 @@ package step.by.step;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.testng.annotations.*;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -25,6 +27,7 @@ public class TestBase {
     public void setUp() {
         driver = driverData.driver;
         wait = driverData.wait;
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         login(new LoginData("ROBOTESTER", "ELECTROSTALIN"));
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
@@ -83,6 +86,10 @@ public class TestBase {
         driver.findElement(By.cssSelector("#menuform\\3Aj_idt36_2_0 span")).click();
     }
 
+    protected void goToRailcarMarshalingShort(){
+        driver.get("http://tos2.solvo.ru:37580/aet/private/rw_train_vizit.xhtml");
+    }
+
     // clink on "create new" button. Seems universal. TODO: check if universal
     protected void clickNew(){
         driver.findElement(By.cssSelector(".new")).click();
@@ -107,8 +114,8 @@ public class TestBase {
 
     protected void RWTrainVizitFillComment(@Nullable String comment){
         try{
-            driver.findElement(By.id("RwTrainVizitEditForm:prepareDate_input")).click();
-            driver.findElement(By.id("RwTrainVizitEditForm:prepareDate_input")).sendKeys(comment);
+            driver.findElement(By.id("RwTrainVizitEditForm:comments")).click();
+            driver.findElement(By.id("RwTrainVizitEditForm:comments")).sendKeys(comment);
         }catch (NullPointerException e){
             System.out.println("Comment was empty");
         }
@@ -116,5 +123,48 @@ public class TestBase {
 
     protected void RWTrainVizitSave(){
         driver.findElement(By.id("RwTrainVizitEditForm:editSaveBtn")).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".new")));
+    }
+
+    // get object ID from the URL
+    protected String getURLID(String url){
+
+        String subUrl;
+        try{
+            subUrl = url.substring(url.indexOf("id=")+3, url.indexOf("&jfwid"));
+        }catch (NullPointerException e){
+            System.out.println("There were no jfwid");
+            subUrl = url.substring(url.indexOf("id="));
+        }catch (Exception e){
+            System.out.println(e);
+            subUrl = null;
+        }
+        return subUrl;
+    }
+
+    // get object field data by field name
+    protected String checkFieldData(List<WebElement> fields, String label){
+        for (WebElement field:fields) {
+            // get all sub-elements
+            List <WebElement> subElements = field.findElements(By.cssSelector("*"));
+            // for each sub-element
+            for (WebElement subElement:subElements){
+
+                // get data DIV text
+                if(subElement.getText().equals(label)){
+                    if(subElement.getText().equals("")){
+                        try{
+                            return subElement.findElement(By.cssSelector("*")).getText();
+                        }catch (Exception e){
+                            return null;
+                        }
+                    }else{
+                        return subElements.get(1).getText();
+                    }
+                //in some rare cases data text may be a link (inside <a>)
+                }
+            }
+        }
+        return null;
     }
 }

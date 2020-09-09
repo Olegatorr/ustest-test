@@ -37,7 +37,7 @@ public class MakeBoLWithGC extends TestMain{
         driver.findElement(By.xpath("//span[contains(.,\'1014241\')]")).click();
         driver.findElement(By.linkText("Cargo")).click();
         driver.findElement(By.xpath("//h3[contains(.,\'Bill of Lading\')]")).click();
-        //driver.findElement(By.linkText("Processing")).click(); // TODO: Examine why tf it isn't working
+        //driver.findElement(By.linkText("Processing")).click(); //
         //driver.findElement(By.linkText("Cargo")).click();
         //driver.findElement(By.cssSelector(".ui-md-12:nth-child(1) .present-card-header")).click();
 

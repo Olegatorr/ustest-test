@@ -5,10 +5,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-public class LoginTest extends TestBase{
+public class Login extends TestBase{
 
     @Test
-    public void testLogin() {
+    public void login() {
         goToMainPage();
         Assert.assertTrue(driver.getCurrentUrl().contains("aet/private/main.xhtml"));
     }
