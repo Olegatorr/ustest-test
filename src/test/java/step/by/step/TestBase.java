@@ -196,7 +196,9 @@ public class TestBase {
         sb.append("Cannot create RWM. Errors: ");
         try{
             // this list contains every <li> with error
-            List <WebElement> errors = driver.findElement(By.className("ui-messages-error")).findElements(By.cssSelector("*")).get(1).findElements(By.cssSelector("*"));
+            List <WebElement> errors2 = driver.findElement(By.cssSelector(".ui-messages .ui-messages-error.ui-corner-all")).findElements(By.cssSelector("*"));
+            //List <WebElement> errors = driver.findElement(By.cssSelector(".ui-messages .ui-messages-error.ui-corner-all")).findElements(By.cssSelector("*")).get(4).findElements(By.cssSelector("*"));
+            List <WebElement> errors = driver.findElement(By.cssSelector(".ui-messages .ui-messages-error.ui-corner-all")).findElement(By.cssSelector("ul")).findElements(By.cssSelector("li"));
             // for each <li> with error get text of its <span>
             for(WebElement error:errors){
                 sb.append(System.getProperty("line.separator"));
@@ -208,6 +210,11 @@ public class TestBase {
             sb.append(e);
         }
         return sb.toString();
+    }
+
+    protected void clickEdit(){
+        driver.findElement(By.cssSelector(".new_config")).click();
+        driver.findElement(By.cssSelector(".ui-state-hover .ui-menuitem-text")).click();
     }
 
 }
