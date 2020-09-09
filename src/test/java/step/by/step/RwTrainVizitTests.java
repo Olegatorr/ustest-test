@@ -20,7 +20,7 @@ public class RwTrainVizitTests extends TestBase{
         goToRailcarMarshaling();
         clickNew();
 
-        // get a unickue name
+        // get a unique name
         Date date = new Date();
         SimpleDateFormat formatterForName = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         SimpleDateFormat formatterForDate = new SimpleDateFormat("dd/MM/yy HH:mm");
@@ -39,21 +39,19 @@ public class RwTrainVizitTests extends TestBase{
 
         String id = getURLID(driver.getCurrentUrl());
 
-        //if(driver.findElement(By.className("ui-messages-error")).isDisplayed()){
-        //    Assert.fail("There were errors while saving the marshaling"); // TODO: parse errors <li>'s to here
-        //}
-
         // get all ui-g-4 blocks of 2 DIVs: label and data
         List<WebElement> fields = driver.findElements(By.className("ui-g-4"));
 
-        Assert.assertEquals("Comparing label and data", RWTrainVizitName , checkFieldData(fields, "Number"));
-        Assert.assertEquals("Comparing label and data", RWTrainVizitRWTrack , checkFieldData(fields, "RW track"));
-        Assert.assertEquals("Comparing label and data", RWTrainVizitDate , checkFieldData(fields, "Marshaling date"));
-        Assert.assertEquals("Comparing label and data", RWTrainVizitComment , checkFieldData(fields, "Comments"));
+        Assert.assertEquals("Comparing number" , RWTrainVizitName , checkFieldData(fields, "Number"));
+        Assert.assertEquals("Comparing track"  , RWTrainVizitRWTrack , checkFieldData(fields, "RW track"));
+        Assert.assertEquals("Comparing date"   , RWTrainVizitDate , checkFieldData(fields, "Marshaling date"));
+        Assert.assertEquals("Comparing comment", RWTrainVizitComment , checkFieldData(fields, "Comments"));
+        Assert.assertTrue("Comparing ID", driver.findElement(By.id("object_card_header")).getText().contains(id));
 
+        // TODO: ask if it is reasonable to go *foreach link* to check this?
         //goToRailcarMarshalingShort();
         //Assert.assertTrue(driver.findElement(By.linkText(id)).isDisplayed());
-
+        
     }
 }
 

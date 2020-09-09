@@ -5,9 +5,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
+import org.testng.Assert;
 import org.testng.annotations.*;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -95,23 +97,27 @@ public class TestBase {
         driver.findElement(By.cssSelector(".new")).click();
     }
 
+    // fill RWM Number
     protected void RWTrainVizitFillName(String name){
         driver.findElement(By.id("RwTrainVizitEditForm:name")).click();
         // TODO: generate unique marshaling name
         driver.findElement(By.id("RwTrainVizitEditForm:name")).sendKeys(name);
     }
 
+    // fill RWM Track
     protected void RWTrainVizitFillRWTrack(String track){
         driver.findElement(By.id("RwTrainVizitEditForm:way:ac_input")).click();
         driver.findElement(By.id("RwTrainVizitEditForm:way:ac_input")).sendKeys(track);
         driver.findElement(By.cssSelector("td:nth-child(1)")).click();
     }
 
+    // fill RWM Date
     protected void RWTrainVizitFillDate(String date){
         driver.findElement(By.id("RwTrainVizitEditForm:prepareDate_input")).click();
         driver.findElement(By.id("RwTrainVizitEditForm:prepareDate_input")).sendKeys(date);
     }
 
+    // fill RWM Comment
     protected void RWTrainVizitFillComment(@Nullable String comment){
         try{
             driver.findElement(By.id("RwTrainVizitEditForm:comments")).click();
@@ -121,9 +127,15 @@ public class TestBase {
         }
     }
 
+    // save RWM
     protected void RWTrainVizitSave(){
         driver.findElement(By.id("RwTrainVizitEditForm:editSaveBtn")).click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".new")));
+        try{
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".new")));
+        }catch (org.openqa.selenium.TimeoutException e){
+            Assert.fail(getErrors());
+        }
+
     }
 
     // get object ID from the URL
@@ -159,12 +171,43 @@ public class TestBase {
                             return null;
                         }
                     }else{
+                        //in some rare cases data text may be a link (inside <a>)
                         return subElements.get(1).getText();
                     }
-                //in some rare cases data text may be a link (inside <a>)
+
                 }
             }
         }
         return null;
     }
+
+    // check if any field-related errors are present
+    protected boolean checkForErrors(){
+        try{
+            return driver.findElement(By.className("ui-messages-error")).isDisplayed();
+        }catch (ElementNotVisibleException e){
+            return false;
+        }
+    }
+
+    // get all field-related errors as String
+    protected String getErrors(){ // TODO: find a way to extract errors
+        StringBuilder sb = new StringBuilder();
+        sb.append("Cannot create RWM. Errors: ");
+        try{
+            // this list contains every <li> with error
+            List <WebElement> errors = driver.findElement(By.className("ui-messages-error")).findElements(By.cssSelector("*")).get(1).findElements(By.cssSelector("*"));
+            // for each <li> with error get text of its <span>
+            for(WebElement error:errors){
+                sb.append(System.getProperty("line.separator"));
+                sb.append(error.findElement(By.cssSelector("*")).getText());
+            }
+        }catch (Exception e){
+            sb.append("unexpected.");
+            sb.append(System.getProperty("line.separator"));
+            sb.append(e);
+        }
+        return sb.toString();
+    }
+
 }
