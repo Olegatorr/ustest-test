@@ -100,13 +100,14 @@ public class TestBase {
     // fill RWM Number
     protected void RWTrainVizitFillName(String name){
         driver.findElement(By.id("RwTrainVizitEditForm:name")).click();
-        // TODO: generate unique marshaling name
+        driver.findElement(By.id("RwTrainVizitEditForm:name")).clear();
         driver.findElement(By.id("RwTrainVizitEditForm:name")).sendKeys(name);
     }
 
     // fill RWM Track
     protected void RWTrainVizitFillRWTrack(String track){
         driver.findElement(By.id("RwTrainVizitEditForm:way:ac_input")).click();
+        driver.findElement(By.id("RwTrainVizitEditForm:way:ac_input")).clear();
         driver.findElement(By.id("RwTrainVizitEditForm:way:ac_input")).sendKeys(track);
         driver.findElement(By.cssSelector("td:nth-child(1)")).click();
     }
@@ -114,6 +115,7 @@ public class TestBase {
     // fill RWM Date
     protected void RWTrainVizitFillDate(String date){
         driver.findElement(By.id("RwTrainVizitEditForm:prepareDate_input")).click();
+        driver.findElement(By.id("RwTrainVizitEditForm:prepareDate_input")).clear();
         driver.findElement(By.id("RwTrainVizitEditForm:prepareDate_input")).sendKeys(date);
     }
 
@@ -121,6 +123,7 @@ public class TestBase {
     protected void RWTrainVizitFillComment(@Nullable String comment){
         try{
             driver.findElement(By.id("RwTrainVizitEditForm:comments")).click();
+            driver.findElement(By.id("RwTrainVizitEditForm:comments")).clear();
             driver.findElement(By.id("RwTrainVizitEditForm:comments")).sendKeys(comment);
         }catch (NullPointerException e){
             System.out.println("Comment was empty");
@@ -214,7 +217,8 @@ public class TestBase {
 
     protected void clickEdit(){
         driver.findElement(By.cssSelector(".new_config")).click();
-        driver.findElement(By.cssSelector(".ui-state-hover .ui-menuitem-text")).click();
+        driver.findElement(By.cssSelector(".ui-menuitem-link .edit")).click();
+        System.out.println("ad");
     }
 
 }

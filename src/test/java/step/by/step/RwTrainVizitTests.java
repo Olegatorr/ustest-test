@@ -13,22 +13,22 @@ public class RwTrainVizitTests extends TestBase{
 
     String id = "";
 
+    // get a unique name
+    Date date = new Date();
+    SimpleDateFormat formatterForName = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    SimpleDateFormat formatterForDate = new SimpleDateFormat("dd/MM/yy HH:mm");
+
+    String RWTrainVizitName = formatterForName.format(date);
+    String RWTrainVizitRWTrack = "RAILWAY";
+    String RWTrainVizitDate = formatterForDate.format(date);
+    String RWTrainVizitComment = "comment";
+
     @Test
     public void testCreateRwTrainVizit() {
 
         goToMainPage();
         goToRailcarMarshaling();
         clickNew();
-
-        // get a unique name
-        Date date = new Date();
-        SimpleDateFormat formatterForName = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        SimpleDateFormat formatterForDate = new SimpleDateFormat("dd/MM/yy HH:mm");
-
-        String RWTrainVizitName = formatterForName.format(date);
-        String RWTrainVizitRWTrack = "RAILWAY";
-        String RWTrainVizitDate = formatterForDate.format(date);
-        String RWTrainVizitComment = "comment";
 
         RWTrainVizitFillName(RWTrainVizitName);
         RWTrainVizitFillRWTrack(RWTrainVizitRWTrack);
@@ -60,6 +60,24 @@ public class RwTrainVizitTests extends TestBase{
         //assuming we are on the same RWM page
         clickEdit();
 
+        RWTrainVizitName = RWTrainVizitName + " edited";
+        RWTrainVizitFillName(RWTrainVizitName);
+        RWTrainVizitRWTrack =  "RAIL12";
+        RWTrainVizitFillRWTrack(RWTrainVizitRWTrack); // no use as of today: only RAILWAY is correctly configured
+        RWTrainVizitDate = formatterForDate.format(new Date());
+        RWTrainVizitFillDate(RWTrainVizitDate);
+        RWTrainVizitComment = RWTrainVizitComment + " edited";
+        RWTrainVizitFillComment(RWTrainVizitComment);
+
+        RWTrainVizitSave();
+
+        List<WebElement> fields = driver.findElements(By.className("ui-g-4"));
+
+        Assert.assertEquals("Comparing number" , RWTrainVizitName , checkFieldData(fields, "Number"));
+        Assert.assertEquals("Comparing track"  , RWTrainVizitRWTrack , checkFieldData(fields, "RW track"));
+        Assert.assertEquals("Comparing date"   , RWTrainVizitDate , checkFieldData(fields, "Marshaling date"));
+        Assert.assertEquals("Comparing comment", RWTrainVizitComment , checkFieldData(fields, "Comments"));
+        Assert.assertTrue("Comparing #", driver.findElement(By.id("object_card_header")).getText().contains(id));
 
     }
 }
