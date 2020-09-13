@@ -1,14 +1,14 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite1" verbose="1" >
-    <test name="FirstTest" >
+    <test name="Test_3" >
         <classes>
-            <class name="test.test.Login" />
+            <class name="step.by.step.Login" />
         </classes>
     </test>
-    <test name="SecondTest" >
+    <test name="Test_4" >
         <classes>
-            <class name="test.test.MakeBoLWithGC" />
+            <class name="step.by.step.RwTrainVizitTests" />
         </classes>
     </test>
 
