@@ -17,7 +17,7 @@ public class DriverData {
     JavascriptExecutor js;
     public Wait<WebDriver> wait;
 
-    public DriverData(){
+    private DriverData(){
         driver = new FirefoxDriver();
         js = (JavascriptExecutor) driver;
         vars = new HashMap<String, Object>();

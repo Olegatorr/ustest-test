@@ -163,7 +163,8 @@ public class TestBase {
             // get all sub-elements
             List <WebElement> subElements = field.findElements(By.cssSelector("*"));
             // for each sub-element
-            for (WebElement subElement:subElements){
+            for (WebElement subElement:subElements)
+            {
 
                 // get data DIV text
                 if(subElement.getText().equals(label)){
@@ -218,7 +219,6 @@ public class TestBase {
     protected void clickEdit(){
         driver.findElement(By.cssSelector(".new_config")).click();
         driver.findElement(By.cssSelector(".ui-menuitem-link .edit")).click();
-        System.out.println("ad");
     }
 
 }

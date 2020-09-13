@@ -1,7 +1,8 @@
 package step.by.step;
-import org.junit.Assert;
+//import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.text.SimpleDateFormat;
@@ -42,11 +43,17 @@ public class RwTrainVizitTests extends TestBase{
         // get all ui-g-4 blocks of 2 DIVs: label and data
         List<WebElement> fields = driver.findElements(By.className("ui-g-4"));
         // assert all fields
-        Assert.assertEquals("Comparing number" , RWTrainVizitName , checkFieldData(fields, "Number"));
-        Assert.assertEquals("Comparing track"  , RWTrainVizitRWTrack , checkFieldData(fields, "RW track"));
-        Assert.assertEquals("Comparing date"   , RWTrainVizitDate , checkFieldData(fields, "Marshaling date"));
-        Assert.assertEquals("Comparing comment", RWTrainVizitComment , checkFieldData(fields, "Comments"));
-        Assert.assertTrue("Comparing #", driver.findElement(By.id("object_card_header")).getText().contains(id));
+        Assert.assertEquals(checkFieldData(fields, "Number"), RWTrainVizitName, "Comparing number");
+        Assert.assertEquals(checkFieldData(fields, "RW track"), RWTrainVizitRWTrack, "RW track");
+        Assert.assertEquals(checkFieldData(fields, "Marshaling date"), RWTrainVizitDate, "Comparing date");
+        Assert.assertEquals(checkFieldData(fields, "Comments"), RWTrainVizitComment, "Comparing comment");
+        Assert.assertTrue(driver.findElement(By.id("object_card_header")).getText().contains(id), "Comparing #");
+
+        //Assert.assertEquals("Comparing number" , RWTrainVizitName , checkFieldData(fields, "Number"));
+        //Assert.assertEquals("Comparing track"  , RWTrainVizitRWTrack , checkFieldData(fields, "RW track"));
+        //Assert.assertEquals("Comparing date"   , RWTrainVizitDate , checkFieldData(fields, "Marshaling date"));
+        //Assert.assertEquals("Comparing comment", RWTrainVizitComment , checkFieldData(fields, "Comments"));
+        //Assert.assertTrue("Comparing #", driver.findElement(By.id("object_card_header")).getText().contains(id));
 
         // TODO: ask if it is reasonable to go *foreach link* to check this?
         // goToRailcarMarshalingShort();
@@ -73,11 +80,11 @@ public class RwTrainVizitTests extends TestBase{
 
         List<WebElement> fields = driver.findElements(By.className("ui-g-4"));
 
-        Assert.assertEquals("Comparing number" , RWTrainVizitName , checkFieldData(fields, "Number"));
-        Assert.assertEquals("Comparing track"  , RWTrainVizitRWTrack , checkFieldData(fields, "RW track"));
-        Assert.assertEquals("Comparing date"   , RWTrainVizitDate , checkFieldData(fields, "Marshaling date"));
-        Assert.assertEquals("Comparing comment", RWTrainVizitComment , checkFieldData(fields, "Comments"));
-        Assert.assertTrue("Comparing #", driver.findElement(By.id("object_card_header")).getText().contains(id));
+        Assert.assertEquals(checkFieldData(fields, "Number"), RWTrainVizitName, "Comparing number");
+        Assert.assertEquals(checkFieldData(fields, "RW track"), RWTrainVizitRWTrack, "RW track");
+        Assert.assertEquals(checkFieldData(fields, "Marshaling date"), RWTrainVizitDate, "Comparing date");
+        Assert.assertEquals(checkFieldData(fields, "Comments"), RWTrainVizitComment, "Comparing comment");
+        Assert.assertTrue(driver.findElement(By.id("object_card_header")).getText().contains(id), "Comparing #");
 
     }
 }
