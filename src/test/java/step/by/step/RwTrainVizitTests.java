@@ -81,6 +81,24 @@ public class RwTrainVizitTests extends TestBase{
         Assert.assertTrue(driver.findElement(By.id("object_card_header")).getText().contains(id), "Comparing #");
 
     }
+
+    @Test
+    public void test1(){
+        goToMainPage();
+        Assert.assertTrue(true, "Example of Successful assert");
+    }
+
+    @Test
+    public void test2(){
+        goToMainPage();
+        Assert.fail("Example of Failed assert");
+    }
+
+    @Test
+    public void test3(){
+        goToMainPage();
+        Assert.fail("Example of another failed assert");
+    }
 }
 
 

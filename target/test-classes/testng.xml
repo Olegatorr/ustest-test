@@ -1,15 +1,17 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite1" verbose="1" >
-    <test name="Test_3" >
+    <test name="Test_Main" >
         <classes>
             <class name="step.by.step.Login" />
-        </classes>
-    </test>
-    <test name="Test_4" >
-        <classes>
             <class name="step.by.step.RwTrainVizitTests" />
+            <class name="step.by.step.FailedClassExample" />
         </classes>
     </test>
+    <!--<test name="Test_Examples" >
+        <classes>
+            <class name="step.by.step.FailExamples" />
+        </classes>
+    </test>-->
 
 </suite>

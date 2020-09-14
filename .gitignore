@@ -1,6 +1,7 @@
 **/build/
 !src/**/build/
 target/
+allure-results/
 
 gradle-app.setting
 !gradle-wrapper.jar
