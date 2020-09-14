@@ -49,12 +49,6 @@ public class RwTrainVizitTests extends TestBase{
         Assert.assertEquals(checkFieldData(fields, "Comments"), RWTrainVizitComment, "Comparing comment");
         Assert.assertTrue(driver.findElement(By.id("object_card_header")).getText().contains(id), "Comparing #");
 
-        //Assert.assertEquals("Comparing number" , RWTrainVizitName , checkFieldData(fields, "Number"));
-        //Assert.assertEquals("Comparing track"  , RWTrainVizitRWTrack , checkFieldData(fields, "RW track"));
-        //Assert.assertEquals("Comparing date"   , RWTrainVizitDate , checkFieldData(fields, "Marshaling date"));
-        //Assert.assertEquals("Comparing comment", RWTrainVizitComment , checkFieldData(fields, "Comments"));
-        //Assert.assertTrue("Comparing #", driver.findElement(By.id("object_card_header")).getText().contains(id));
-
         // TODO: ask if it is reasonable to go *foreach link* to check this?
         // goToRailcarMarshalingShort();
         // Assert.assertTrue(driver.findElement(By.linkText(id)).isDisplayed());
