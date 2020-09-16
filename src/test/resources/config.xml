@@ -3,6 +3,6 @@
 <settings>
 
     <loginPage>http://tos2.solvo.ru:37580/aet/login.xhtml</loginPage>
-    <defaultURL>http://tos2.solvo.ru:37580/aet/</defaultURL>
+    <defaultURL>http://tos2.solvo.ru:37580/aet/private/</defaultURL>
 
 </settings>

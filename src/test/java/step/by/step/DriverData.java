@@ -21,7 +21,7 @@ public class DriverData {
         driver = new FirefoxDriver();
         js = (JavascriptExecutor) driver;
         vars = new HashMap<String, Object>();
-        wait = new WebDriverWait(driver, 5, 1000);
+        wait = new WebDriverWait(driver, 8, 500);
     }
 
     //return driver object

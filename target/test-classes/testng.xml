@@ -5,7 +5,7 @@
     <test name="Test_Main" >
         <classes>
             <class name="step.by.step.Login" />
-            <class name="step.by.step.RwTrainVizitTests" />
+            <class name="step.by.step.RailcarMarshalingTests" />
         </classes>
     </test>
 

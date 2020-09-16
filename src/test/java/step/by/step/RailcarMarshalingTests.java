@@ -10,51 +10,39 @@ import java.util.Date;
 import java.util.List;
 
 
-public class RwTrainVizitTests extends TestBase{
+public class RailcarMarshalingTests extends TestBase{
 
-    String id = "";
-
-    // get a unique name
-    Date date = new Date();
-    SimpleDateFormat formatterForName = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-    SimpleDateFormat formatterForDate = new SimpleDateFormat("dd/MM/yy HH:mm");
-
-    String RWTrainVizitName = formatterForName.format(date);
-    String RWTrainVizitRWTrack = "RAILWAY";
-    String RWTrainVizitDate = formatterForDate.format(date);
-    String RWTrainVizitComment = "comment";
+    RailcarMarshalingFillPage railcarMarshalingFillPage;
+    RailcarMarshalingViewPage railcarMarshalingViewPage;
+    RailcarMarshalingData data;
 
     @Test
     public void testCreateRwTrainVizit() {
 
-        goToMainPage();
         goToRailcarMarshaling();
         clickNew();
 
-        RWTrainVizitFillName(RWTrainVizitName);
-        RWTrainVizitFillRWTrack(RWTrainVizitRWTrack);
-        RWTrainVizitFillDate(RWTrainVizitDate);
-        RWTrainVizitFillComment(RWTrainVizitComment);
+        // create new page object
+        railcarMarshalingFillPage = new RailcarMarshalingFillPage(driver, wait);
 
-        RWTrainVizitSave();
+        // generate valid field data for all fields
+        data = RailcarMarshalingData.createValidData();
+        // break some data
+        data.date = "";
+        // create RWM, expecting a failure
+        railcarMarshalingFillPage.makeRailcarMarshalingFail(data);
+        railcarMarshalingFillPage.checkErrorMessage("Marshaling date: Validation Error: Value is required.");
 
-        id = getURLID(driver.getCurrentUrl());
+        // generate valid field data for all fields
+        data = RailcarMarshalingData.createValidData();
+        // create RWM, expecting a success
+        railcarMarshalingViewPage = railcarMarshalingFillPage.makeRailcarMarshalingSuccess(data);
 
-        // get all ui-g-4 blocks of 2 DIVs: label and data
-        List<WebElement> fields = driver.findElements(By.className("ui-g-4"));
-        // assert all fields
-        Assert.assertEquals(checkFieldData(fields, "Number"), RWTrainVizitName, "Comparing number");
-        Assert.assertEquals(checkFieldData(fields, "RW track"), RWTrainVizitRWTrack, "RW track");
-        Assert.assertEquals(checkFieldData(fields, "Marshaling date"), RWTrainVizitDate, "Comparing date");
-        Assert.assertEquals(checkFieldData(fields, "Comments"), RWTrainVizitComment, "Comparing comment");
-        Assert.assertTrue(driver.findElement(By.id("object_card_header")).getText().contains(id), "Comparing #");
 
-        // TODO: ask if it is reasonable to go *foreach link* to check this?
-        // goToRailcarMarshalingShort();
-        // Assert.assertTrue(driver.findElement(By.linkText(id)).isDisplayed());
 
     }
 
+    /*
     @Test
     public void testEditRwTrainVizit(){
 
@@ -81,6 +69,7 @@ public class RwTrainVizitTests extends TestBase{
         Assert.assertTrue(driver.findElement(By.id("object_card_header")).getText().contains(id), "Comparing #");
 
     }
+    */
 
     @Test
     public void test1(){
@@ -99,6 +88,8 @@ public class RwTrainVizitTests extends TestBase{
         goToMainPage();
         Assert.fail("Example of another failed assert");
     }
+
+
 }
 
 

@@ -1,19 +1,19 @@
 package step.by.step;
 
 public class LoginData {
-    private final String robotester;
-    private final String electrostalin;
+    private final String login;
+    private final String password;
 
-    public LoginData(String robotester, String electrostalin) {
-        this.robotester = robotester;
-        this.electrostalin = electrostalin;
+    public LoginData(String login, String password) {
+        this.login = login;
+        this.password = password;
     }
 
-    public String getRobotester() {
-        return robotester;
+    public String getLogin() {
+        return login;
     }
 
-    public String getElectrostalin() {
-        return electrostalin;
+    public String getPassword() {
+        return password;
     }
 }
