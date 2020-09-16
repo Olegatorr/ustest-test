@@ -9,9 +9,13 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 import javax.annotation.Nullable;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class TestBase {
@@ -20,17 +24,27 @@ public class TestBase {
     public Map<String, Object> vars;
     JavascriptExecutor js;
     public Wait<WebDriver> wait;
-
+    private SessionHelper sessionHelper;
+    private final Properties properties;
     // get singleton driver class instance
     DriverData driverData = DriverData.getInstance();
 
+    public TestBase() {
+        properties = new Properties();
+        sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
+    }
+
+    public void init() throws IOException {
+        String target = System.getProperty("target", "local");
+        properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+    }
     // runs once before ALL the tests
     @BeforeSuite
     public void setUp() {
         driver = driverData.driver;
         wait = driverData.wait;
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        login(new LoginData("ROBOTESTER", "ELECTROSTALIN"));
+        //login(new LoginData("ROBOTESTER", "ELECTROSTALIN"));
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
@@ -48,34 +62,6 @@ public class TestBase {
     }
 
     // login to 7.1 EE
-    protected void login(LoginData loginData) {
-
-        driver.get("http://tos2.solvo.ru:37580/aet/login.xhtml");
-        driver.manage().window().setSize(new Dimension(1800, 1000));
-        driver.findElement(By.id("LoginForm:userid")).click();
-        driver.findElement(By.id("LoginForm:userid")).sendKeys(loginData.getRobotester());
-        driver.findElement(By.id("LoginForm:password")).sendKeys(loginData.getElectrostalin());
-        driver.findElement(By.id("LoginForm:language")).click();
-        driver.findElement(By.id("LoginForm:language_label")).click();
-        driver.findElement(By.id("LoginForm:language_0")).click();
-        driver.findElement(By.cssSelector(".ui-button-text:nth-child(2)")).click();
-
-        //in case of an existing active login we need to confirm login
-        try{
-            {
-                WebElement element = driver.findElement(By.cssSelector("#duplicateLoginForm\\3A duplicateLoginYesBtn > .ui-button-text"));
-                Actions builder = new Actions(driver);
-                builder.moveToElement(element).perform();
-            }
-            driver.findElement(By.cssSelector("#duplicateLoginForm\\3A duplicateLoginYesBtn > .ui-button-text")).click();
-            System.out.println("There was active login");
-        }catch (Exception e){
-            System.out.println("There was no active login");
-        }
-
-        //then wait for redirection to the main page to happen
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".worker-avatar-clip")));
-    }
 
     // go to 7.1 EE main page
     protected void goToMainPage() {
