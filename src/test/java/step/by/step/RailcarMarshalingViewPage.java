@@ -1,14 +1,16 @@
 package step.by.step;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 
-public class RailcarMarshalingViewPage {
+public class RailcarMarshalingViewPage extends PageBase{
 
     private static final String URL_MATCH = "rw_train_vizit/view.xhtml";
     RailcarMarshalingData data;
@@ -34,18 +36,23 @@ public class RailcarMarshalingViewPage {
 
 
     public RailcarMarshalingViewPage(WebDriver driver, Wait<WebDriver> wait, RailcarMarshalingData data) {
-        if (!driver.getCurrentUrl().contains(URL_MATCH)) {
-            throw new IllegalStateException("This is not the page you are expected");
-        }
 
         PageFactory.initElements(driver, this);
         this.wait = wait;
         this.driver = driver;
         this.data = data;
 
+        this.wait.until(ExpectedConditions.visibilityOf(this.driver.findElement(By.id("object_card_header"))));
+
+        if (!this.driver.getCurrentUrl().contains(URL_MATCH)) {
+
+            throw new IllegalStateException("This is not the page you are expected");
+        }
+
         validateData();
     }
 
+    @Step("validate Data")
     private void validateData(){
         Assert.assertEquals(number.getText(), data.number,"Comparing data");
         Assert.assertEquals(RWTrack.getText(), data.RWTrack,"Comparing data");

@@ -1,6 +1,7 @@
 package step.by.step;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,7 +15,7 @@ import javax.annotation.Nullable;
 import java.sql.Driver;
 import java.util.*;
 
-public class RailcarMarshalingFillPage {
+public class RailcarMarshalingFillPage extends PageBase{
 
     private static final String URL_MATCH = "rw_train_vizit/edit.xhtml";
     private WebDriver driver;
@@ -52,6 +53,7 @@ public class RailcarMarshalingFillPage {
         this.driver = driver;
     }
 
+    @Story("makeRailcarMarshalingSuccess")
     public RailcarMarshalingViewPage makeRailcarMarshalingSuccess(RailcarMarshalingData data){
         fillNumber(data.number);
         fillTrack(data.RWTrack);
@@ -62,6 +64,7 @@ public class RailcarMarshalingFillPage {
         return new RailcarMarshalingViewPage(driver, wait, data);
     }
 
+    @Story("makeRailcarMarshalingFailure")
     public RailcarMarshalingFillPage makeRailcarMarshalingFail(RailcarMarshalingData data){
         fillNumber(data.number);
         fillTrack(data.RWTrack);
@@ -76,12 +79,14 @@ public class RailcarMarshalingFillPage {
         return this;
     }
 
+    @Step("fill Number")
     private void fillNumber(String _number){
         number.click();
         number.clear();
         number.sendKeys(_number);
     }
 
+    @Step("fill Track")
     private void fillTrack(String _track){
         RWTrack.click();
         RWTrack.clear();
@@ -90,12 +95,14 @@ public class RailcarMarshalingFillPage {
         driver.findElement(By.cssSelector("td:nth-child(1)")).click();
     }
 
+    @Step("fill Fate")
     private void fillDate(String _date){
         date.click();
         date.clear();
         date.sendKeys(_date);
     }
 
+    @Step("fill Comment")
     private void fillComment(@Nullable String _comment){
         try{
             comment.click();
@@ -106,6 +113,7 @@ public class RailcarMarshalingFillPage {
         }
     }
 
+    @Step("save")
     private void save(){
         bSave.click();
     }
@@ -118,6 +126,7 @@ public class RailcarMarshalingFillPage {
         }
 
         for(WebElement error: errors){
+            attachError(error.getText());
             errorMessages.add(error.getText());
         }
 
@@ -145,9 +154,15 @@ public class RailcarMarshalingFillPage {
             return this;
         }
 
+        errorMessages.add(errors.get(0).getText());
         Assert.assertEquals(errors.get(0).getText(), expectedError, "Comparing Errors");
 
         return this;
+    }
+
+    @Attachment
+    private String attachError(String error){
+        return error;
     }
 
 }

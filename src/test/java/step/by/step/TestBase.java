@@ -1,11 +1,15 @@
 package step.by.step;
 
+import io.qameta.allure.Attachment;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
+import org.testng.ITestContext;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import javax.annotation.Nullable;
@@ -30,8 +34,7 @@ public class TestBase {
         driver = driverData.driver;
         wait = driverData.wait;
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        login(new LoginData("ROBOTESTER", "ELECTROSTALIN"));
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        //login(new LoginData("ROBOTESTER", "ELECTROSTALIN", "English"));
     }
 
     // runs before every @Test-annotated method
@@ -39,6 +42,13 @@ public class TestBase {
     public void beforeMethod(){
         driver = driverData.driver;
         wait = driverData.wait;
+    }
+
+    @AfterMethod
+    public void afterMethod(ITestResult result){
+        if(result.getStatus() == ITestResult.FAILURE){
+            onTestFailure(result);
+        }
     }
 
     // runs after ALL the tests
@@ -53,8 +63,8 @@ public class TestBase {
         driver.get("http://tos2.solvo.ru:37580/aet/login.xhtml");
         driver.manage().window().setSize(new Dimension(1800, 1000));
         driver.findElement(By.id("LoginForm:userid")).click();
-        driver.findElement(By.id("LoginForm:userid")).sendKeys(loginData.getLogin());
-        driver.findElement(By.id("LoginForm:password")).sendKeys(loginData.getPassword());
+        driver.findElement(By.id("LoginForm:userid")).sendKeys(loginData.login);
+        driver.findElement(By.id("LoginForm:password")).sendKeys(loginData.password);
         driver.findElement(By.id("LoginForm:language")).click();
         driver.findElement(By.id("LoginForm:language_label")).click();
         driver.findElement(By.id("LoginForm:language_0")).click();
@@ -77,7 +87,6 @@ public class TestBase {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".worker-avatar-clip")));
     }
 
-    // go to 7.1 EE main page
     protected void goToMainPage() {
         driver.get("http://tos2.solvo.ru:37580/aet/private/main.xhtml");
     }
@@ -86,7 +95,22 @@ public class TestBase {
         driver.get("http://tos2.solvo.ru:37580/aet/private/rw_train_vizit.xhtml");
     }
 
-    // clink on "create new" button. Universal.
+    protected void goToLogin(){
+        driver.get("http://tos2.solvo.ru:37580/aet/login.xhtml");
+    }
+
+    public void onTestFailure(ITestResult result){
+        System.out.println("*** Test execution " + result.getMethod().getMethodName() + " failed...");
+        System.out.println(result.getMethod().getMethodName() + " failed!");
+
+        saveScreenshot(driver);
+    }
+
+    @Attachment
+    public byte[] saveScreenshot(WebDriver driver){
+        return (((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES));
+    }
+
     protected void clickNew(){
         driver.findElement(By.cssSelector(".new")).click();
     }
