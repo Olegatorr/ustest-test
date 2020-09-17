@@ -45,7 +45,6 @@ public class RailcarMarshalingViewPage extends PageBase{
         this.wait.until(ExpectedConditions.visibilityOf(this.driver.findElement(By.id("object_card_header"))));
 
         if (!this.driver.getCurrentUrl().contains(URL_MATCH)) {
-
             throw new IllegalStateException("This is not the page you are expected");
         }
 

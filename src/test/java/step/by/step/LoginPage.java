@@ -28,8 +28,8 @@ public class LoginPage extends PageBase{
     @FindBy(id = "LoginForm:language")
     private WebElement language;
 
-    @FindBy(id = "LoginForm:language_items")
-    private WebElement languages;
+    @FindBy(className = "ui-selectonemenu-item")
+    private List<WebElement> languages;
 
     @FindBy(css = ".ui-button-text:nth-child(2)")
     private WebElement bLogin;
@@ -78,7 +78,6 @@ public class LoginPage extends PageBase{
         return this;
     }
 
-
     @Step("fill Login")
     private void fillLogin(String _user){
         user.click();
@@ -97,13 +96,12 @@ public class LoginPage extends PageBase{
     private void selectLanguage(String _language){
         boolean languageSelected = false;
         language.click();
-        List<WebElement> _languages = languages.findElements(By.cssSelector("li"));
-        wait.until(ExpectedConditions.visibilityOf(_languages.get(0)));
 
-        for(WebElement element:_languages){
+        for(WebElement element:languages){
             if(element.getText().equals(_language)){
                 element.click();
                 languageSelected = true;
+                break;
             }
         }
         driver.findElement(By.className("login-body")).click();
@@ -117,9 +115,8 @@ public class LoginPage extends PageBase{
         bLogin.click();
         try{
             Actions builder = new Actions(driver);
-            builder.moveToElement(bConfirmLogin).perform();
-            bConfirmLogin.click();
-        }catch (ElementNotVisibleException e){
+            builder.moveToElement(bConfirmLogin).click().perform();
+        }catch (Exception e){
             e.printStackTrace();
         }
     }

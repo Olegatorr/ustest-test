@@ -1,14 +1,6 @@
 package step.by.step;
-//import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.*;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
 
 public class RailcarMarshalingTests extends TestBase{
 
@@ -35,10 +27,9 @@ public class RailcarMarshalingTests extends TestBase{
 
         // generate valid field data for all fields
         data = RailcarMarshalingData.createValidData();
+
         // create RWM, expecting a success
         railcarMarshalingViewPage = railcarMarshalingFillPage.makeRailcarMarshalingSuccess(data);
-
-
 
     }
 
@@ -73,19 +64,16 @@ public class RailcarMarshalingTests extends TestBase{
 
     @Test
     public void test1(){
-        goToMainPage();
         Assert.assertTrue(true, "Example of Successful assert");
     }
 
     @Test
     public void test2(){
-        goToMainPage();
         Assert.fail("Example of Failed assert");
     }
 
     @Test
     public void test3(){
-        goToMainPage();
         Assert.fail("Example of another failed assert");
     }
 
