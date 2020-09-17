@@ -116,6 +116,8 @@ public class RailcarMarshalingFillPage extends PageBase{
 
     public RailcarMarshalingFillPage checkErrorMessages(){
 
+        errorMessages.clear();
+
         if(errors == null){
             Assert.fail("Error(s) should be present");
             return this;

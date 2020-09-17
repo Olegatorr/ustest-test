@@ -1,4 +1,5 @@
 package step.by.step;
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -8,8 +9,9 @@ public class RailcarMarshalingTests extends TestBase{
     RailcarMarshalingViewPage railcarMarshalingViewPage;
     RailcarMarshalingData data;
 
-    @Test
-    public void testCreateRwTrainVizit() {
+    @Description("negative create Railcar Marshaling 1")
+    @Test (priority = 1)
+    public void CreateRailcarMarshalingNegativeExample1() {
 
         goToRailcarMarshaling();
         clickNew();
@@ -23,9 +25,33 @@ public class RailcarMarshalingTests extends TestBase{
         data.date = "";
         // create RWM, expecting a failure
         railcarMarshalingFillPage.makeRailcarMarshalingFail(data);
+        // check if specific expected error is present
         railcarMarshalingFillPage.checkErrorMessage("Marshaling date: Validation Error: Value is required.");
+        // TODO: parse expected error message from tos2
 
-        // generate valid field data for all fields
+    }
+
+    @Description("negative create Railcar Marshaling 2")
+    @Test (priority = 1)
+    public void CreateRailcarMarshalingNegativeExample2() {
+
+        goToRailcarMarshaling();
+        clickNew();
+
+        data = RailcarMarshalingData.createValidData();
+        data.number = "";
+        railcarMarshalingFillPage.makeRailcarMarshalingFail(data);
+        railcarMarshalingFillPage.checkErrorMessage("Number: Validation Error: Value is required.");
+
+    }
+
+    @Description("positive create Railcar Marshaling")
+    @Test (priority = 2)
+    public void CreateRailcarMarshalingPositive() {
+
+        goToRailcarMarshaling();
+        clickNew();
+
         data = RailcarMarshalingData.createValidData();
 
         // create RWM, expecting a success
@@ -33,34 +59,18 @@ public class RailcarMarshalingTests extends TestBase{
 
     }
 
-    /*
-    @Test
-    public void testEditRwTrainVizit(){
+
+    @Description("positive edit Railcar Marshaling")
+    @Test (priority = 3)
+    public void EditRailcarMarshalingPositive(){
 
         //assuming we are on the same RWM page
         clickEdit();
 
-        RWTrainVizitName = RWTrainVizitName + " edited";
-        RWTrainVizitFillName(RWTrainVizitName);
-        RWTrainVizitRWTrack =  "RAIL12";
-        RWTrainVizitFillRWTrack(RWTrainVizitRWTrack); // no use as of today: only RAILWAY is correctly configured
-        RWTrainVizitDate = formatterForDate.format(new Date());
-        RWTrainVizitFillDate(RWTrainVizitDate);
-        RWTrainVizitComment = RWTrainVizitComment + " edited";
-        RWTrainVizitFillComment(RWTrainVizitComment);
-
-        RWTrainVizitSave();
-
-        List<WebElement> fields = driver.findElements(By.className("ui-g-4"));
-
-        Assert.assertEquals(checkFieldData(fields, "Number"), RWTrainVizitName, "Comparing number");
-        Assert.assertEquals(checkFieldData(fields, "RW track"), RWTrainVizitRWTrack, "RW track");
-        Assert.assertEquals(checkFieldData(fields, "Marshaling date"), RWTrainVizitDate, "Comparing date");
-        Assert.assertEquals(checkFieldData(fields, "Comments"), RWTrainVizitComment, "Comparing comment");
-        Assert.assertTrue(driver.findElement(By.id("object_card_header")).getText().contains(id), "Comparing #");
-
+        data = RailcarMarshalingData.createValidData();
+        railcarMarshalingFillPage.makeRailcarMarshalingSuccess(data);
     }
-    */
+
 
     @Test
     public void test1(){

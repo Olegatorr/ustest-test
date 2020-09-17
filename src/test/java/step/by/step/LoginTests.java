@@ -10,7 +10,7 @@ public class LoginTests extends TestBase{
     @Severity(SeverityLevel.NORMAL)
     @Description("negative Login (wrong login)")
     @Test (priority=1)
-    public void negativeLoginWrongLogin() {
+    public void loginNegativeWrongLogin() {
 
         goToLogin();
         LoginPage loginPage = new LoginPage(driver, wait);
@@ -22,7 +22,7 @@ public class LoginTests extends TestBase{
     @Severity(SeverityLevel.NORMAL)
     @Description("negative Login (wrong password)")
     @Test (priority=1)
-    public void negativeLoginWrongPassword() {
+    public void loginNegativeWrongPassword() {
 
         goToLogin();
         LoginPage loginPage = new LoginPage(driver, wait);
@@ -34,7 +34,7 @@ public class LoginTests extends TestBase{
     @Severity(SeverityLevel.BLOCKER)
     @Description("positive Login")
     @Test (priority=2)
-    public void positiveLogin() {
+    public void loginPositive() {
 
         goToLogin();
         LoginPage loginPage = new LoginPage(driver, wait);

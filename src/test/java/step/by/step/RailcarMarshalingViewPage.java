@@ -48,7 +48,23 @@ public class RailcarMarshalingViewPage extends PageBase{
             throw new IllegalStateException("This is not the page you are expected");
         }
 
+        getId();
         validateData();
+    }
+
+    public RailcarMarshalingViewPage(WebDriver driver, Wait<WebDriver> wait) {
+
+        PageFactory.initElements(driver, this);
+        this.wait = wait;
+        this.driver = driver;
+
+        this.wait.until(ExpectedConditions.visibilityOf(this.driver.findElement(By.id("object_card_header"))));
+
+        if (!this.driver.getCurrentUrl().contains(URL_MATCH)) {
+            throw new IllegalStateException("This is not the page you are expected");
+        }
+
+        getId();
     }
 
     @Step("validate Data")
@@ -58,7 +74,7 @@ public class RailcarMarshalingViewPage extends PageBase{
         Assert.assertEquals(date.getText(), data.date,"Comparing data");
         //Assert.assertEquals(work.getText(), [GET EXPECTED WORK FROM SYS PARAMS],"Comparing data");
         Assert.assertEquals(comment.getText(), data.comment,"Comparing data");
-        Assert.assertTrue(driver.findElement(By.id("object_card_header")).getText().contains(getId()), "Comparing id");
+        //Assert.assertTrue(driver.findElement(By.id("object_card_header")).getText().contains(getId()), "Comparing id");
     }
 
     public String getId(){
