@@ -1,4 +1,4 @@
-package step.by.step;
+package robotest.base.driver;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

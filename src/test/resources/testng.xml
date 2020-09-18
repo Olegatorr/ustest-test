@@ -4,8 +4,8 @@
 
     <test name="Test_Main" >
         <classes>
-            <class name="step.by.step.LoginTests" />
-            <class name="step.by.step.RailcarMarshalingTests" />
+            <class name="robotest.test.cases.LoginTests" />
+            <class name="robotest.test.cases.RailcarMarshalingTests" />
         </classes>
     </test>
 

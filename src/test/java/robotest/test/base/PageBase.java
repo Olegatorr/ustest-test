@@ -1,4 +1,4 @@
-package step.by.step;
+package robotest.test.base;
 
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;

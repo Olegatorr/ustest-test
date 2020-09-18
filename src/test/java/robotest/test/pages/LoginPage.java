@@ -1,4 +1,4 @@
-package step.by.step;
+package robotest.test.pages;
 
 import io.qameta.allure.Step;
 import io.qameta.allure.Story;
@@ -9,11 +9,12 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
+import robotest.test.base.PageBase;
+import robotest.test.data.LoginData;
 
-import java.sql.Driver;
 import java.util.List;
 
-public class LoginPage extends PageBase{
+public class LoginPage extends PageBase {
 
     String URL_MATCH = "aet/login.xhtml";
     private WebDriver driver;
@@ -119,6 +120,11 @@ public class LoginPage extends PageBase{
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Step("isErrorsPresent")
+    public boolean isErrorsPresent(){
+        return !errors.isEmpty();
     }
 
 
