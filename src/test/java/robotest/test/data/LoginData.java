@@ -1,4 +1,4 @@
-package step.by.step;
+package robotest.test.data;
 
 public class LoginData {
     public String login;

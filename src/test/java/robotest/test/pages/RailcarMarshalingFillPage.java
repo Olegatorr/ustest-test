@@ -1,4 +1,4 @@
-package step.by.step;
+package robotest.test.pages;
 
 import io.qameta.allure.*;
 import org.openqa.selenium.By;
@@ -8,10 +8,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
+import robotest.test.base.PageBase;
+import robotest.test.data.RailcarMarshalingData;
+
 import javax.annotation.Nullable;
 import java.util.*;
 
-public class RailcarMarshalingFillPage extends PageBase{
+public class RailcarMarshalingFillPage extends PageBase {
 
     private static final String URL_MATCH = "rw_train_vizit/edit.xhtml";
     private WebDriver driver;
@@ -49,7 +52,7 @@ public class RailcarMarshalingFillPage extends PageBase{
         this.driver = driver;
     }
 
-    @Story("makeRailcarMarshalingSuccess")
+    @Description("makeRailcarMarshalingSuccess")
     public RailcarMarshalingViewPage makeRailcarMarshalingSuccess(RailcarMarshalingData data){
         fillNumber(data.number);
         fillTrack(data.RWTrack);
@@ -60,7 +63,7 @@ public class RailcarMarshalingFillPage extends PageBase{
         return new RailcarMarshalingViewPage(driver, wait, data);
     }
 
-    @Story("makeRailcarMarshalingFailure")
+    @Description("makeRailcarMarshalingFailure")
     public RailcarMarshalingFillPage makeRailcarMarshalingFail(RailcarMarshalingData data){
         fillNumber(data.number);
         fillTrack(data.RWTrack);
@@ -131,31 +134,19 @@ public class RailcarMarshalingFillPage extends PageBase{
         return this;
     }
 
-    public RailcarMarshalingFillPage checkErrorMessages(List<String> expectedErrors){
-
-        if(errors == null){
-            Assert.fail("Error(s) should be present");
-            return this;
-        }
-
-        for(WebElement error:errors){
-            Assert.assertTrue(errors.contains(error.getText()));
-        }
-
-        return this;
+    public boolean isErrorPresent(){
+        return !errors.isEmpty();
     }
 
-    public RailcarMarshalingFillPage checkErrorMessage(String expectedError){
+    public String getErrorMessage(){
 
         if(errors == null){
             Assert.fail("Error(s) should be present");
-            return this;
+            return "";
         }
 
-        errorMessages.add(errors.get(0).getText());
-        Assert.assertEquals(errors.get(0).getText(), expectedError, "Comparing Errors");
-
-        return this;
+        attachError(errors.get(0).getText());
+        return errors.get(0).getText();
     }
 
     @Attachment

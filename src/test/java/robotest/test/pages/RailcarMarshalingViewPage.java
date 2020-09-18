@@ -1,4 +1,4 @@
-package step.by.step;
+package robotest.test.pages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
@@ -9,8 +9,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
+import robotest.test.base.PageBase;
+import robotest.test.data.RailcarMarshalingData;
 
-public class RailcarMarshalingViewPage extends PageBase{
+public class RailcarMarshalingViewPage extends PageBase {
 
     private static final String URL_MATCH = "rw_train_vizit/view.xhtml";
     RailcarMarshalingData data;

@@ -1,10 +1,11 @@
-package step.by.step;
+package robotest.test.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Wait;
+import robotest.test.base.PageBase;
 
-public class MainPage extends PageBase{
+public class MainPage extends PageBase {
 
     String URL_MATCH = "private/main.xhtml";
     private WebDriver driver;

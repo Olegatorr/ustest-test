@@ -1,15 +1,20 @@
-package step.by.step;
+package robotest.test.cases;
 import io.qameta.allure.Description;
+import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import robotest.test.base.TestBase;
+import robotest.test.data.RailcarMarshalingData;
+import robotest.test.pages.RailcarMarshalingFillPage;
+import robotest.test.pages.RailcarMarshalingViewPage;
 
-public class RailcarMarshalingTests extends TestBase{
+public class RailcarMarshalingTests extends TestBase {
 
     RailcarMarshalingFillPage railcarMarshalingFillPage;
     RailcarMarshalingViewPage railcarMarshalingViewPage;
     RailcarMarshalingData data;
 
-    @Description("negative create Railcar Marshaling 1")
+    @Story("negative create Railcar Marshaling 1")
     @Test (priority = 1)
     public void CreateRailcarMarshalingNegativeExample1() {
 
@@ -26,12 +31,14 @@ public class RailcarMarshalingTests extends TestBase{
         // create RWM, expecting a failure
         railcarMarshalingFillPage.makeRailcarMarshalingFail(data);
         // check if specific expected error is present
-        railcarMarshalingFillPage.checkErrorMessage("Marshaling date: Validation Error: Value is required.");
-        // TODO: parse expected error message from tos2
+        Assert.assertEquals(
+                railcarMarshalingFillPage.getErrorMessage(),
+                "Marshaling date: Validation Error: Value is required.",
+                "Comparing error message");
 
     }
 
-    @Description("negative create Railcar Marshaling 2")
+    @Story("negative create Railcar Marshaling 2")
     @Test (priority = 1)
     public void CreateRailcarMarshalingNegativeExample2() {
 
@@ -41,11 +48,14 @@ public class RailcarMarshalingTests extends TestBase{
         data = RailcarMarshalingData.createValidData();
         data.number = "";
         railcarMarshalingFillPage.makeRailcarMarshalingFail(data);
-        railcarMarshalingFillPage.checkErrorMessage("Number: Validation Error: Value is required.");
+        Assert.assertEquals(
+                railcarMarshalingFillPage.getErrorMessage(),
+                "Number: Validation Error: Value is required.",
+                "Comparing error message");
 
     }
 
-    @Description("positive create Railcar Marshaling")
+    @Story("positive create Railcar Marshaling")
     @Test (priority = 2)
     public void CreateRailcarMarshalingPositive() {
 
@@ -60,7 +70,7 @@ public class RailcarMarshalingTests extends TestBase{
     }
 
 
-    @Description("positive edit Railcar Marshaling")
+    @Story("positive edit Railcar Marshaling")
     @Test (priority = 3)
     public void EditRailcarMarshalingPositive(){
 

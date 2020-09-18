@@ -1,11 +1,16 @@
-package step.by.step;
+package robotest.test.cases;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+import robotest.test.base.TestBase;
+import robotest.test.data.LoginData;
+import robotest.test.pages.LoginPage;
+import robotest.test.pages.MainPage;
 
-public class LoginTests extends TestBase{
+public class LoginTests extends TestBase {
 
     @Severity(SeverityLevel.NORMAL)
     @Description("negative Login (wrong login)")
@@ -16,6 +21,7 @@ public class LoginTests extends TestBase{
         LoginPage loginPage = new LoginPage(driver, wait);
         LoginData data = new LoginData("2421525dfs", "ELECTROSTALIN", "English");
         loginPage.loginFail(data);
+        Assert.assertTrue(loginPage.isErrorsPresent(), "Checking if error is present");
 
     }
 
@@ -26,8 +32,9 @@ public class LoginTests extends TestBase{
 
         goToLogin();
         LoginPage loginPage = new LoginPage(driver, wait);
-        LoginData data = new LoginData("ROBOTESTER", "sdaf54636", "English");
+        LoginData data = new LoginData("ROBOTESTER", "sASD54636", "English");
         loginPage.loginFail(data);
+        Assert.assertTrue(loginPage.isErrorsPresent(), "Checking if error is present");
 
     }
 
@@ -39,7 +46,8 @@ public class LoginTests extends TestBase{
         goToLogin();
         LoginPage loginPage = new LoginPage(driver, wait);
         LoginData data = new LoginData("ROBOTESTER", "ELECTROSTALIN", "English");
-        loginPage.loginSuccess(data);
+        MainPage mainPage = loginPage.loginSuccess(data);
+        Assert.assertNotNull(mainPage, "Checking if main page obj initialized");
 
     }
 }

@@ -1,20 +1,16 @@
-package step.by.step;
+package robotest.test.base;
 
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.support.ui.Wait;
-import org.testng.Assert;
-import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
+import robotest.base.driver.DriverData;
+import robotest.test.data.LoginData;
 
-import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
