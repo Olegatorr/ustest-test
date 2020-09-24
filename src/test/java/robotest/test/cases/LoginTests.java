@@ -17,7 +17,6 @@ public class LoginTests extends TestBase {
     @Description("negative Login (wrong login)")
     @Test (priority=1)
     public void loginNegativeWrongLogin() {
-
         goToLogin();
         LoginPage loginPage = new LoginPage();
         loginPage = loginPage.loginFail(ConfigParser.login + "1", ConfigParser.password);
@@ -29,7 +28,6 @@ public class LoginTests extends TestBase {
     @Description("negative Login (wrong password)")
     @Test (priority=1)
     public void loginNegativeWrongPassword() {
-
         goToLogin();
         LoginPage loginPage = new LoginPage();
         loginPage = loginPage.loginFail(ConfigParser.login, ConfigParser.password + "1");
@@ -45,7 +43,7 @@ public class LoginTests extends TestBase {
         goToLogin();
         LoginPage loginPage = new LoginPage();
         MainPage mainPage = loginPage.loginSuccess(ConfigParser.login, ConfigParser.password);
-        Assert.assertTrue(mainPage.getCurrentUrl().contains("main"));
+        Assert.assertTrue(mainPage.isOpen());
 
     }
 }
