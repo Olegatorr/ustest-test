@@ -1,4 +1,5 @@
-package robotest.base.driver;
+/*
+package robotest.base.browser;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -24,7 +25,7 @@ public class DriverData {
         wait = new WebDriverWait(driver, 8, 500);
     }
 
-    //return driver object
+    //return browser object
     public WebDriver getDriver(){
         return this.driver;
     }
@@ -43,3 +44,4 @@ public class DriverData {
     }
 
 }
+*/

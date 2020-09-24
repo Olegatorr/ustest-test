@@ -76,7 +76,7 @@ public class RailcarMarshalingViewPage extends PageBase {
         Assert.assertEquals(date.getText(), data.date,"Comparing data");
         //Assert.assertEquals(work.getText(), [GET EXPECTED WORK FROM SYS PARAMS],"Comparing data");
         Assert.assertEquals(comment.getText(), data.comment,"Comparing data");
-        //Assert.assertTrue(driver.findElement(By.id("object_card_header")).getText().contains(getId()), "Comparing id");
+        //Assert.assertTrue(browser.findElement(By.id("object_card_header")).getText().contains(getId()), "Comparing id");
     }
 
     public String getId(){
@@ -95,5 +95,10 @@ public class RailcarMarshalingViewPage extends PageBase {
         }
         return id;
 
+    }
+
+    @Override
+    public boolean isOpen() {
+        return false;
     }
 }

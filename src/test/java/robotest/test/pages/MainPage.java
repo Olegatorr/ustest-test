@@ -1,24 +1,24 @@
 package robotest.test.pages;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Wait;
 import robotest.test.base.PageBase;
 
 public class MainPage extends PageBase {
 
     String URL_MATCH = "private/main.xhtml";
-    private WebDriver driver;
-    private Wait<WebDriver> wait;
+    //ужасный xpath, подумать
+    String avatar = "/html/body/div[1]/div[1]/div[2]/ul/li[1]/a/div";
 
-    public MainPage(WebDriver driver, Wait<WebDriver> wait) {
+    public MainPage() {
+        super();
+        pageOpenWait(avatar);
+    }
+
+    @Override
+    public boolean isOpen() {
         if (!driver.getCurrentUrl().contains(URL_MATCH)) {
             throw new IllegalStateException("This is not the page you are expected");
         }
-
-        PageFactory.initElements(driver, this);
-        this.wait = wait;
-        this.driver = driver;
+        return true;
     }
 
 }

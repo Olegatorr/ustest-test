@@ -154,4 +154,8 @@ public class RailcarMarshalingFillPage extends PageBase {
         return error;
     }
 
+    @Override
+    public boolean isOpen() {
+        return false;
+    }
 }

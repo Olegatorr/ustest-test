@@ -1,32 +1,8 @@
-**/build/
-!src/**/build/
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Maven
+log/
 target/
-allure-results/
-
-gradle-app.setting
-!gradle-wrapper.jar
-.gradletasknamecache
-
-.idea/workspace.xml
-
-.gradle/4.10.3/fileHashes/fileHashes.bin
-.gradle/
-.idea
-.allure
-*.lock
-*.bin
-
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.versionsBackup
-pom.xml.next
-release.properties
-dependency-reduced-pom.xml
-buildNumber.properties
-.mvn/timing.properties
-
-# https://github.com/takari/maven-wrapper#usage-without-binary-jar
-.mvn/wrapper/maven-wrapper.jar
-
-# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
-# gradle/wrapper/gradle-wrapper.properties

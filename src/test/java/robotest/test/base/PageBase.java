@@ -1,14 +1,24 @@
 package robotest.test.base;
 
-import io.qameta.allure.Attachment;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestContext;
-import org.testng.ITestResult;
+import robotest.base.browser.Browser;
+import robotest.base.waiting.WebDriverWaits;
 
-public class PageBase {
+public abstract class PageBase {
+    public WebDriver driver;
+    public PageBase() {
+        driver = Browser.getInstance().driver;
+    }
 
+    public abstract boolean isOpen();
 
+    public String getCurrentUrl(){
+        return driver.getCurrentUrl();
+    }
+
+    public void pageOpenWait(String pageOpenLocator){
+        (new WebDriverWaits()).pageOpenWait(pageOpenLocator);
+    }
 
 }

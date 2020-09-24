@@ -1,3 +1,4 @@
+/*
 package robotest.test.cases;
 import io.qameta.allure.Description;
 import io.qameta.allure.Story;
@@ -64,3 +65,4 @@ public class RailcarMarshalingCreateTestsPositive extends TestBase {
 
 
 
+*/
