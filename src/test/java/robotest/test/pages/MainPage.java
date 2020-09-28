@@ -16,7 +16,7 @@ public class MainPage extends PageBase {
     @Override
     public boolean isOpen() {
         if (!driver.getCurrentUrl().contains(URL_MATCH)) {
-            throw new IllegalStateException("This is not the page you are expected");
+            return false;
         }
         return true;
     }

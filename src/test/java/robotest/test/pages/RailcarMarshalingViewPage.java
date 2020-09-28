@@ -1,16 +1,16 @@
 package robotest.test.pages;
 
-import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
-import org.testng.Assert;
-import robotest.test.base.PageBase;
-import robotest.test.data.RailcarMarshalingData;
+        import io.qameta.allure.Step;
+        import org.openqa.selenium.By;
+        import org.openqa.selenium.WebDriver;
+        import org.openqa.selenium.WebElement;
+        import org.openqa.selenium.support.FindBy;
+        import org.openqa.selenium.support.PageFactory;
+        import org.openqa.selenium.support.ui.ExpectedConditions;
+        import org.openqa.selenium.support.ui.Wait;
+        import org.testng.Assert;
+        import robotest.test.base.PageBase;
+        import robotest.test.data.RailcarMarshalingData;
 
 public class RailcarMarshalingViewPage extends PageBase {
 
@@ -82,7 +82,7 @@ public class RailcarMarshalingViewPage extends PageBase {
     @Override
     public boolean isOpen() {
         if (!this.driver.getCurrentUrl().contains(URL_MATCH)) {
-            throw new IllegalStateException("This is not the page you are expected");
+            return false;
         }
         return true;
     }

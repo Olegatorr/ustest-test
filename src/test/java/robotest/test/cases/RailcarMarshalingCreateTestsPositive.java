@@ -4,8 +4,11 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import robotest.base.parsers.ConfigParser;
 import robotest.test.base.TestBase;
 import robotest.test.data.RailcarMarshalingData;
+import robotest.test.pages.LoginPage;
+import robotest.test.pages.MainPage;
 import robotest.test.pages.RailcarMarshalingFillPage;
 import robotest.test.pages.RailcarMarshalingViewPage;
 
@@ -13,9 +16,8 @@ public class RailcarMarshalingCreateTestsPositive extends TestBase {
 
     RailcarMarshalingFillPage railcarMarshalingFillPage;
     RailcarMarshalingViewPage railcarMarshalingViewPage;
+    MainPage mainPage;
     RailcarMarshalingData data;
-
-
 
     @Story("positive create Railcar Marshaling")
     @Test (priority = 1)

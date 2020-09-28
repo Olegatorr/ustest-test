@@ -1,5 +1,6 @@
 package robotest.base.waiting;
 
+import org.openqa.selenium.StaleElementReferenceException;
 import robotest.base.parsers.ConfigParser;
 import robotest.base.browser.Browser;
 import org.openqa.selenium.By;
@@ -20,7 +21,12 @@ public class WebDriverWaits {
     }
 
     public WebElement explicitWaitOfElement(String locator) {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
+        } catch(StaleElementReferenceException e) {
+            System.out.print("IN EXCEPTION");
+            explicitWaitOfElement(locator);
+        }
         return driver.findElement(By.xpath(locator));
     }
 
