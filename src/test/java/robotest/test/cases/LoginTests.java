@@ -44,6 +44,5 @@ public class LoginTests extends TestBase {
         LoginPage loginPage = new LoginPage();
         MainPage mainPage = loginPage.loginSuccess(ConfigParser.login, ConfigParser.password);
         Assert.assertTrue(mainPage.isOpen());
-
     }
 }

@@ -14,7 +14,7 @@ import static robotest.base.browser.Browser.*;
 
 public class TestBase {
 
-    public WebDriver driver;
+    public static WebDriver driver;
     private String jsonPath = "./src/test/java/robotest/base/resources/JSON.json";
 
     @BeforeSuite
@@ -23,13 +23,14 @@ public class TestBase {
         driver = getInstance().driver;
         driver.manage().timeouts().implicitlyWait(ConfigParser.timeOutInSeconds, TimeUnit.SECONDS);
     }
-
+/*
     @AfterMethod
     public void afterMethod(ITestResult result){
         if(result.getStatus() == ITestResult.FAILURE){
             onTestFailure(result);
         }
     }
+    */
 
     // runs after ALL the tests
     @AfterSuite

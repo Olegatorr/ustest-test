@@ -19,4 +19,9 @@ public class Field extends BaseElement {
         click();
         clear();
     }
+
+    public void sendKeysWithClear(String keys) {
+        clickWithClear();
+        sendKeys(keys);
+    }
 }

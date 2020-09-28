@@ -8,7 +8,7 @@ import robotest.test.forms.LanguageDropDown;
 
 public class LoginPage extends PageBase {
     private String URL_MATCH = "aet/login.xhtml";
-    private BaseElement error = new BaseElement("//span[contains(text(),'Неправильное')]");
+    private BaseElement errorLogin = new BaseElement("//span[contains(text(),'Неправильное')]");
     private Field login = new Field("//*[@id=\"LoginForm:userid\"]");
     private Field password = new Field("//*[@id=\"LoginForm:password\"]");
     private LanguageDropDown languageSelect = new LanguageDropDown("//*[@id=\"LoginForm:language\"]","//*[@id=\"LoginForm:language_input\"]/option  ");
@@ -29,35 +29,26 @@ public class LoginPage extends PageBase {
 
     @Story("login Success")
     public MainPage loginSuccess(String log, String pass){
-        fill(login,log);
-        fill(password, pass);
+        login(log, pass);
         selectLanguage();
         bLogin.click();
-
-        try{
+        if (bConfirmLogin.isVisible()) {
             bConfirmLogin.click();
-        }catch (Exception e){
-            e.printStackTrace();
         }
-
         return new MainPage();
     }
 
     @Story("login Fail")
     public LoginPage loginFail(String log, String pass){
-        fill(login,log);
-        fill(password, pass);
+        login(log, pass);
         selectLanguage();
         bLogin.click();
-        if (bConfirmLogin.isVisible()) {
-                bConfirmLogin.click();
-        }
         return this;
     }
 
-    private void fill(Field field, String keys){
-        field.clickWithClear();
-        field.sendKeys(keys);
+    public void login(String log, String pass) {
+        login.sendKeysWithClear(log);
+        password.sendKeysWithClear(pass);
     }
 
     @Step("select Language")
@@ -67,7 +58,7 @@ public class LoginPage extends PageBase {
 
     @Step("isErrorsPresent")
     public boolean isErrorsPresent(){
-        return error.isPresence();
+        return errorLogin.isPresence();
     }
 
 }

@@ -16,7 +16,6 @@ public class RailcarMarshalingViewPage extends PageBase {
 
     private static final String URL_MATCH = "rw_train_vizit/view.xhtml";
     RailcarMarshalingData data;
-    private WebDriver driver;
     private Wait<WebDriver> wait;
     public String id;
 
@@ -37,19 +36,8 @@ public class RailcarMarshalingViewPage extends PageBase {
 
 
 
-    public RailcarMarshalingViewPage(WebDriver driver, Wait<WebDriver> wait, RailcarMarshalingData data) {
-
-        PageFactory.initElements(driver, this);
-        this.wait = wait;
-        this.driver = driver;
-        this.data = data;
-
-        this.wait.until(ExpectedConditions.visibilityOf(this.driver.findElement(By.id("object_card_header"))));
-
-        if (!this.driver.getCurrentUrl().contains(URL_MATCH)) {
-            throw new IllegalStateException("This is not the page you are expected");
-        }
-
+    public RailcarMarshalingViewPage() {
+        super();
         getId();
         validateData();
     }
@@ -57,14 +45,8 @@ public class RailcarMarshalingViewPage extends PageBase {
     public RailcarMarshalingViewPage(WebDriver driver, Wait<WebDriver> wait) {
 
         PageFactory.initElements(driver, this);
-        this.wait = wait;
-        this.driver = driver;
-
         this.wait.until(ExpectedConditions.visibilityOf(this.driver.findElement(By.id("object_card_header"))));
 
-        if (!this.driver.getCurrentUrl().contains(URL_MATCH)) {
-            throw new IllegalStateException("This is not the page you are expected");
-        }
 
         getId();
     }
@@ -99,6 +81,9 @@ public class RailcarMarshalingViewPage extends PageBase {
 
     @Override
     public boolean isOpen() {
-        return false;
+        if (!this.driver.getCurrentUrl().contains(URL_MATCH)) {
+            throw new IllegalStateException("This is not the page you are expected");
+        }
+        return true;
     }
 }
