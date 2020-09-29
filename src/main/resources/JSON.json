@@ -1,0 +1,7 @@
+{"browser": "Chrome",
+  "language": "en",
+  "timeOut": 30,
+  "login": "ROBOTESTER",
+  "password": "ELECTROSTALIN",
+  "loginUrl": "http://tos2.solvo.ru:37580/aet/login.xhtml"
+}

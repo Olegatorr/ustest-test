@@ -1,12 +1,13 @@
+/*
 package robotest.test.cases;
 
 import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import robotest.test.base.TestBase;
-import robotest.test.data.RailcarMarshalingData;
-import robotest.test.pages.RailcarMarshalingFillPage;
-import robotest.test.pages.RailcarMarshalingViewPage;
+import TestBase;
+import helpers.RailcarMarshalingData;
+import RailcarMarshalingFillPage;
+import RailcarMarshalingViewPage;
 
 public class RailcarMarshalingCreateTestsNegative extends TestBase {
 
@@ -51,3 +52,4 @@ public class RailcarMarshalingCreateTestsNegative extends TestBase {
 
     }
 }
+*/

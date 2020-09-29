@@ -4,11 +4,10 @@
 
     <test name="Test_Main" >
         <classes>
-            <class name="robotest.*" />
-            <class name="robotest.test.cases.LoginTests" />
+            <class name="cases.LoginTests" />
             <class name="robotest.test.cases.RailcarMarshalingCreateTestsNegative" />
-            <class name="robotest.test.cases.RailcarMarshalingCreateTestsPositive" />
-            <class name="robotest.test.cases.RailcarMarshalingEditTestsPositive" />
+            <class name="cases.RailcarMarshalingCreateTestsPositive" />
+            <class name="cases.RailcarMarshalingEditTestsPositive" />
         </classes>
     </test>
 

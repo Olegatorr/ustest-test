@@ -1,4 +1,4 @@
-package robotest.test.data;
+package helpers;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

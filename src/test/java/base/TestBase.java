@@ -1,58 +1,43 @@
-package robotest.test.base;
+package base;
 
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.BeforeSuite;
+import java.util.concurrent.TimeUnit;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.support.ui.Wait;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import robotest.base.driver.DriverData;
-import robotest.test.data.LoginData;
+import parsers.ConfigParser;
 
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
+import static browser.Browser.*;
 
 public class TestBase {
 
-    public WebDriver driver;
-    public Map<String, Object> vars;
-    JavascriptExecutor js;
-    public Wait<WebDriver> wait;
+    public static WebDriver driver;
+    private String jsonPath = "./src/main/resources/JSON.json";
 
-    // get singleton driver class instance
-    DriverData driverData = DriverData.getInstance();
-
-    // runs once before ALL the tests
     @BeforeSuite
     public void setUp() {
-        driver = driverData.driver;
-        wait = driverData.wait;
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        //login(new LoginData("ROBOTESTER", "ELECTROSTALIN", "English"));
+        ConfigParser.getData(jsonPath);
+        driver = getInstance().driver;
+        driver.manage().timeouts().implicitlyWait(ConfigParser.timeOutInSeconds, TimeUnit.SECONDS);
     }
-
-    // runs before every @Test-annotated method
-    @BeforeMethod
-    public void beforeMethod(){
-        driver = driverData.driver;
-        wait = driverData.wait;
-    }
-
+/*
     @AfterMethod
     public void afterMethod(ITestResult result){
         if(result.getStatus() == ITestResult.FAILURE){
             onTestFailure(result);
         }
     }
+    */
 
     // runs after ALL the tests
     @AfterSuite
     public void tearDown(){
         driver.quit();
     }
-
+/*
     // login to 7.1 EE
     protected void login(LoginData loginData) {
 
@@ -86,13 +71,13 @@ public class TestBase {
     protected void goToMainPage() {
         driver.get("http://tos2.solvo.ru:37580/aet/private/main.xhtml");
     }
-
+*/
     protected void goToRailcarMarshaling(){
         driver.get("http://tos2.solvo.ru:37580/aet/private/rw_train_vizit.xhtml");
     }
 
     protected void goToLogin(){
-        driver.get("http://tos2.solvo.ru:37580/aet/login.xhtml");
+        driver.get(ConfigParser.loginUrl);
     }
 
     public void onTestFailure(ITestResult result){

@@ -1,4 +1,4 @@
-package robotest.test.cases;
+package cases;
 
 public class RailcarMarshalingEditTestsPositive {
 }

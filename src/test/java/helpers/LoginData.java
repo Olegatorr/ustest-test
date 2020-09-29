@@ -1,4 +1,4 @@
-package robotest.test.data;
+package helpers;
 
 public class LoginData {
     public String login;
