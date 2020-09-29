@@ -21,12 +21,7 @@ public class WebDriverWaits {
     }
 
     public WebElement explicitWaitOfElement(String locator) {
-        try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
-        } catch(StaleElementReferenceException e) {
-            System.out.print("IN EXCEPTION");
-            explicitWaitOfElement(locator);
-        }
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
         return driver.findElement(By.xpath(locator));
     }
 

@@ -1,5 +1,6 @@
 package base;
 
+import org.openqa.selenium.StaleElementReferenceException;
 import waiting.WebDriverWaits;
 import org.openqa.selenium.WebElement;
 
@@ -21,7 +22,11 @@ public class BaseElement {
     }
 
     public void click() {
-        (new WebDriverWaits()).explicitWaitOfElement(locator).click();
+        try {
+            (new WebDriverWaits()).explicitWaitOfElement(locator).click();
+        } catch(StaleElementReferenceException e) {
+            (new WebDriverWaits()).explicitWaitOfElement(locator).click();
+        }
     }
 
     public WebElement getWebElement() {
