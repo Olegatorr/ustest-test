@@ -19,14 +19,19 @@ public class RailcarMarshalingFillPage extends PageBase {
     @FindBy(css = ".ui-messages .ui-messages-error ul li span")
     private List<WebElement> errors;
 
-    private Field number = new Field("//*[@id=\"RwTrainVizitEditForm:name\"]");
-    private Field track = new Field("//*[@id=\"RwTrainVizitEditForm:way:ac_input\"]");
-    private Field date = new Field("//*[@id=\"RwTrainVizitEditForm:prepareDate_input\"]");
-    private Field comment = new Field("//*[@id=\"RwTrainVizitEditForm:comments\"]");
-    private Button bSave = new Button("//*[@id=\"RwTrainVizitEditForm:editSaveBtn\"]");
+    private final Field number = new Field("//*[@id=\"RwTrainVizitEditForm:name\"]");
+    private final Field track = new Field("//*[@id=\"RwTrainVizitEditForm:way:ac_input\"]");
+    private final Field date = new Field("//*[@id=\"RwTrainVizitEditForm:prepareDate_input\"]");
+    private final Field comment = new Field("//*[@id=\"RwTrainVizitEditForm:comments\"]");
+    private final Button bSave = new Button("//*[@id=\"RwTrainVizitEditForm:editSaveBtn\"]");
 
     public RailcarMarshalingFillPage() {
         super();
+    }
+
+    @Override
+    public boolean isOpen() {
+        return driver.getCurrentUrl().contains(URL_MATCH);
     }
 
     @Description("makeRailcarMarshalingSuccess")
@@ -88,11 +93,5 @@ public class RailcarMarshalingFillPage extends PageBase {
         return error;
     }
 
-    @Override
-    public boolean isOpen() {
-        if (!driver.getCurrentUrl().contains(URL_MATCH)) {
-            return false;
-        }
-        return true;
-    }
+
 }

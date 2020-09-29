@@ -4,7 +4,7 @@ import org.openqa.selenium.StaleElementReferenceException;
 import waiting.WebDriverWaits;
 import org.openqa.selenium.WebElement;
 
-//добавить сеттеры и геттеры
+//TODO: добавить сеттеры и геттеры
 
 public class BaseElement {
     String locator;

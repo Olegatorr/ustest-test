@@ -15,15 +15,16 @@ import java.util.HashMap;
 public class BrowserFactory {
 
     private static WebDriver chromeProperties() {
+
         HashMap<String, Object> chromePrefs = new HashMap<>();
         chromePrefs.put("download.default_directory", System.getProperty("user.dir"));
         chromePrefs.put("intl.accept_languages", ConfigParser.language);
         chromePrefs.put("safebrowsing.enabled", "true");
-        chromePrefs.put("safebrowsing.enabled", "true");
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("prefs", chromePrefs);
+
         WebDriverManager.chromedriver().setup();
-        return new ChromeDriver(options);
+        return new ChromeDriver();
 
     }
 

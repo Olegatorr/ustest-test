@@ -23,7 +23,8 @@ public class TestBase {
         driver = getInstance().driver;
         driver.manage().timeouts().implicitlyWait(ConfigParser.timeOutInSeconds, TimeUnit.SECONDS);
     }
-/*
+
+    /*
     @AfterMethod
     public void afterMethod(ITestResult result){
         if(result.getStatus() == ITestResult.FAILURE){

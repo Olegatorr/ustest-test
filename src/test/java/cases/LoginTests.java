@@ -32,7 +32,6 @@ public class LoginTests extends TestBase {
         LoginPage loginPage = new LoginPage();
         loginPage = loginPage.loginFail(ConfigParser.login, ConfigParser.password + "1");
         Assert.assertTrue(loginPage.isErrorsPresent());
-
     }
 
 

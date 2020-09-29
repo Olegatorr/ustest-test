@@ -5,7 +5,7 @@
     <test name="Test_Main" >
         <classes>
             <class name="cases.LoginTests" />
-            <class name="robotest.test.cases.RailcarMarshalingCreateTestsNegative" />
+            <!--<class name="robotest.test.cases.RailcarMarshalingCreateTestsNegative" />-->
             <class name="cases.RailcarMarshalingCreateTestsPositive" />
             <class name="cases.RailcarMarshalingEditTestsPositive" />
         </classes>

@@ -1,5 +1,6 @@
 package pages;
 
+        import base.Field;
         import io.qameta.allure.Step;
         import org.openqa.selenium.By;
         import org.openqa.selenium.WebDriver;
@@ -16,25 +17,13 @@ public class RailcarMarshalingViewPage extends PageBase {
 
     private static final String URL_MATCH = "rw_train_vizit/view.xhtml";
     RailcarMarshalingData data;
-    private Wait<WebDriver> wait;
     public String id;
 
-    @FindBy(xpath = "/html/body/div[1]/div[2]/div[1]/div[2]/div[1]/div/div[1]/div[2]")
-    private WebElement number;
-
-    @FindBy(xpath = "/html/body/div[1]/div[2]/div[1]/div[2]/div[1]/div/div[2]/div[2]/a")
-    private WebElement RWTrack;
-
-    @FindBy(xpath = "/html/body/div[1]/div[2]/div[1]/div[2]/div[1]/div/div[3]/div[2]")
-    private WebElement date;
-
-    @FindBy(xpath = "/html/body/div[1]/div[2]/div[1]/div[2]/div[1]/div/div[4]/div[2]")
-    private WebElement work;
-
-    @FindBy(xpath = "/html/body/div[1]/div[2]/div[1]/div[2]/div[1]/div/div[5]/div[2]")
-    private WebElement comment;
-
-
+    private final Field number = new Field("/html/body/div[1]/div[2]/div[1]/div[2]/div[1]/div/div[1]/div[2]");
+    private final Field RWTrack = new Field("/html/body/div[1]/div[2]/div[1]/div[2]/div[1]/div/div[2]/div[2]/a");
+    private final Field date = new Field("/html/body/div[1]/div[2]/div[1]/div[2]/div[1]/div/div[3]/div[2]");
+    private final Field work = new Field("/html/body/div[1]/div[2]/div[1]/div[2]/div[1]/div/div[4]/div[2]");
+    private final Field comment = new Field("/html/body/div[1]/div[2]/div[1]/div[2]/div[1]/div/div[5]/div[2]");
 
     public RailcarMarshalingViewPage() {
         super();
@@ -45,7 +34,7 @@ public class RailcarMarshalingViewPage extends PageBase {
     public RailcarMarshalingViewPage(WebDriver driver, Wait<WebDriver> wait) {
 
         PageFactory.initElements(driver, this);
-        this.wait.until(ExpectedConditions.visibilityOf(this.driver.findElement(By.id("object_card_header"))));
+        //this.wait.until(ExpectedConditions.visibilityOf(this.driver.findElement(By.id("object_card_header"))));
 
 
         getId();
