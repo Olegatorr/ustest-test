@@ -37,7 +37,7 @@ public class BaseElement {
         return (new WebDriverWaits()).explicitWaitOfElement(locator).getAttribute(attribute);
     }
 
-    public boolean isPresence() {
+    public boolean isPresent() {
         return (new WebDriverWaits().explicitWaitOfElement(locator) != null);
 
     }

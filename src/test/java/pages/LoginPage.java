@@ -4,13 +4,13 @@ import Enums.ErrorLoginOptions;
 import base.BaseElement;
 import base.Button;
 import base.Field;
+import helpers.LanguageFactory;
 import helpers.XpathCreator;
 import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import base.PageBase;
 import forms.LanguageDropDown;
 import parsers.ConfigParser;
-import org.openqa.selenium.By;
 
 public class LoginPage extends PageBase {
 
@@ -18,7 +18,8 @@ public class LoginPage extends PageBase {
     private final String URL_MATCH = "aet/login.xhtml";
 
     //TODO: find non language-dependent solution
-    private final BaseElement errorLogin = new BaseElement("//span[contains(text(),'%s')]");
+    private String errorLoginTemplate = "//span[contains(text(),'%s')]";
+    private BaseElement errorLogin = new BaseElement(XpathCreator.createXpath(errorLoginTemplate, ErrorLoginOptions.ERRORLOGIN));
     private final Field login = new Field("//*[@id=\"LoginForm:userid\"]");
     private final Field password = new Field("//*[@id=\"LoginForm:password\"]");
     private final LanguageDropDown languageSelect = new LanguageDropDown("//*[@id=\"LoginForm:language\"]","//*[@id=\"LoginForm:language_input\"]/option  ");
@@ -76,7 +77,7 @@ public class LoginPage extends PageBase {
 
     @Step("is Errors Present")
     public boolean isErrorsPresent(){
-        return errorLogin.isPresence();
+        return errorLogin.isPresent();
     }
 
 }
