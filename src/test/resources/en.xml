@@ -1,0 +1,12 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<!DOCTYPE data>
+<data>
+    <words>
+        <word name="Number" value="Number"/>
+        <word name="RWTrack" value="RW track"/>
+        <word name="Date" value="Marshaling date"/>
+        <word name="Work" value="Work creation method"/>
+        <word name="Comments" value="Comments"/>
+        <word name="ErrorLogin" value="incorrect"/>
+    </words>>
+</data>

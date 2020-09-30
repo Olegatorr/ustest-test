@@ -1,5 +1,6 @@
 package base;
 
+import helpers.LanguageFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeSuite;
 import java.util.concurrent.TimeUnit;
@@ -9,6 +10,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import parsers.ConfigParser;
+import parsers.XmlParser;
 
 import static browser.Browser.*;
 
@@ -20,6 +22,7 @@ public class TestBase {
     @BeforeSuite
     public void setUp() {
         ConfigParser.getData(jsonPath);
+        LanguageFactory.getData();
         driver = getInstance().driver;
         driver.manage().timeouts().implicitlyWait(ConfigParser.timeOutInSeconds, TimeUnit.SECONDS);
     }
