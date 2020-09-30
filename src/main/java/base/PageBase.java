@@ -5,13 +5,17 @@ import org.openqa.selenium.WebDriver;
 import browser.Browser;
 import waiting.WebDriverWaits;
 
-public abstract class PageBase {
+public class PageBase {
     public WebDriver driver;
-    public PageBase() {
+    public String URL_MATCH ;
+    public PageBase(String url) {
         driver = Browser.getInstance().driver;
+        URL_MATCH = url;
     }
 
-    public abstract boolean isOpen();
+    public  boolean isOpen() {
+        return driver.getCurrentUrl().contains(URL_MATCH);
+    }
 
     public String getCurrentUrl(){
         return driver.getCurrentUrl();

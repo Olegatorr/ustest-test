@@ -12,7 +12,7 @@ import forms.LanguageDropDown;
 import parsers.ConfigParser;
 
 public class LoginPage extends PageBase {
-    private String URL_MATCH = "aet/login.xhtml";
+    private static String URL_MATCH = "aet/login.xhtml";
     private String errorLoginTemplate = "//span[contains(text(),'%s')]";
     private BaseElement errorLogin = new BaseElement(XpathCreator.createXpath(errorLoginTemplate, ErrorLoginOptions.ERRORLOGIN));
     private Field login = new Field("//*[@id=\"LoginForm:userid\"]");
@@ -22,16 +22,9 @@ public class LoginPage extends PageBase {
     private Button bConfirmLogin = new Button("//*[@id=\"duplicateLoginForm:duplicateLoginYesBtn\"]");
 
     public LoginPage() {
-        super();
+        super(URL_MATCH);
     }
 
-    @Override
-    public boolean isOpen() {
-        if (!driver.getCurrentUrl().contains(URL_MATCH)) {
-            return false;
-        }
-        return true;
-    }
 
     @Story("login Success")
     public MainPage loginSuccess(String log, String pass){

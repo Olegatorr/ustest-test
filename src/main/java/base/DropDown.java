@@ -1,26 +1,22 @@
-package forms;
-
-
-import base.BaseElement;
-import base.ListBaseElement;
+package base;
 
 import java.util.Random;
 
-public class LanguageDropDown {
-    protected BaseElement element ;
+public class DropDown {
+    protected BaseElement element;
+    protected BaseElement optionElement;
     protected ListBaseElement options;
-    String optionTemplate = "//*[@id=\"LoginForm:language_%s\"] ";
+    String optionTemplate;
 
-    public LanguageDropDown(String locator, String optionsLocator) {
-        super();
+    public DropDown(String locator, String optionTemplate) {
         element = new BaseElement(locator);
-        options  = new ListBaseElement(optionsLocator);
+        this.optionTemplate = optionTemplate;
     }
 
     public void select() {
         element.click();
-        String optionLocator = String.format(optionTemplate, selectRandomOption());
-        (new BaseElement(optionLocator)).click();
+        optionElement = options.list.get(selectRandomOption());
+        optionElement.click();
     }
 
     public void select(String option) {
