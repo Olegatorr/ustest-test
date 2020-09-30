@@ -31,7 +31,7 @@ public class BrowserFactory {
         options.setExperimentalOption("prefs", chromePrefs);
 
         WebDriverManager.chromedriver().setup();
-        return new ChromeDriver();
+        return new ChromeDriver(options);
 
     }
 
