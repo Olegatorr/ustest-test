@@ -44,7 +44,7 @@ public class RCMViewPage extends PageBase {
      * Constructor
      */
     public RCMViewPage() {
-        super();
+        super(URL_MATCH);
         getId();
     }
 

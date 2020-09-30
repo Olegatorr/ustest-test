@@ -38,7 +38,7 @@ public class RCMFillPage extends PageBase {
      * Constructor
      */
     public RCMFillPage() {
-        super();
+        super(URL_MATCH);
     }
 
     /**

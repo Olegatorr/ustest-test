@@ -22,7 +22,7 @@ public class LoginPage extends PageBase {
 
     /** URL_MATCH contains part of the UPL which is unique for this page */
     // TODO: parse url_match from json
-    private final String URL_MATCH = "aet/login.xhtml";
+    private final static String URL_MATCH = "aet/login.xhtml";
 
     /** wrapped elements of the page */
     private final String errorLoginTemplate = "//span[contains(text(),'%s')]";

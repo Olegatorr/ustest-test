@@ -14,7 +14,6 @@ public class PageBase {
 
 	/** Constructor */
     public PageBase(String url) {
-
         driver = Browser.getInstance().driver;
         URL_MATCH = url;
     }
