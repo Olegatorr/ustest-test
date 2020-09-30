@@ -6,8 +6,8 @@
         <classes>
             <class name="cases.LoginTests" />
             <!--<class name="robotest.test.cases.RailcarMarshalingCreateTestsNegative" />-->
-            <class name="cases.RailcarMarshalingCreateTestsPositive" />
-            <class name="cases.RailcarMarshalingEditTestsPositive" />
+            <class name="cases.RCMCreateTestsPositive" />
+            <class name="cases.RCMEditTestsPositive" />
         </classes>
     </test>
 

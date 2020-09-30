@@ -36,45 +36,45 @@ public class LoginPage extends PageBase {
 
     @Story("login Success")
     public MainPage loginSuccess(String log, String pass){
-        login(log, pass);
+        fill(log, pass);
         selectLanguageOption();
         bLogin.click();
         if (bConfirmLogin.isVisible()) {
             bConfirmLogin.click();
-            System.out.println("bConfirmLogin was visible");
-        }else{
-            System.out.println("bConfirmLogin was not visible");
         }
         return new MainPage();
     }
 
     @Story("login Fail")
     public LoginPage loginFail(String log, String pass){
-        login(log, pass);
+        fill(log, pass);
         selectLanguageOption();
         bLogin.click();
         return this;
     }
 
+    @Step("fill login & password")
     private void fill(String log, String pass) {
         login.sendKeysWithClear(log);
         password.sendKeysWithClear(pass);
     }
 
-    @Step("select Language")
-    private void selectLanguage(){
-        languageSelect.select("0");
+    @Step("select Language as arg")
+    private void selectLanguage(String lang){
+        // arg should be "0" for eng, "1" for rus, etc.
+        languageSelect.select(lang);
     }
 
+    @Step("select Language from Config")
     private void selectLanguageOption(){
         if (ConfigParser.language.equals("en")) {
             languageSelect.select("0");
-        } else {
+        } else if (ConfigParser.language.equals("ru")){
             languageSelect.select("1");
         }
     }
 
-    @Step("isErrorsPresent")
+    @Step("is Errors Present")
     public boolean isErrorsPresent(){
         return errorLogin.isPresence();
     }

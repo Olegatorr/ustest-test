@@ -8,11 +8,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import base.PageBase;
-import helpers.RailcarMarshalingData;
+import helpers.RCMData;
 
 import java.util.*;
 
-public class RailcarMarshalingFillPage extends PageBase {
+public class RCMFillPage extends PageBase {
 
     private static final String URL_MATCH = "rw_train_vizit/edit.xhtml";
     public List<String> errorMessages = new ArrayList<String>();
@@ -25,7 +25,7 @@ public class RailcarMarshalingFillPage extends PageBase {
     private final Field comment = new Field("//*[@id=\"RwTrainVizitEditForm:comments\"]");
     private final Button bSave = new Button("//*[@id=\"RwTrainVizitEditForm:editSaveBtn\"]");
 
-    public RailcarMarshalingFillPage() {
+    public RCMFillPage() {
         super();
     }
 
@@ -34,29 +34,32 @@ public class RailcarMarshalingFillPage extends PageBase {
         return driver.getCurrentUrl().contains(URL_MATCH);
     }
 
-    @Description("makeRailcarMarshalingSuccess")
-    public RailcarMarshalingViewPage makeRailcarMarshalingSuccess(RailcarMarshalingData data){
-        makeRailcarMarshaling(data);
+    @Story("make Railcar Marshaling Success")
+    public RCMViewPage makeRCMSuccess(RCMData data){
+        fill(data);
         bSave.click();
-        return new RailcarMarshalingViewPage();
+        return new RCMViewPage();
     }
 
-    @Description("makeRailcarMarshalingFailure")
-    public RailcarMarshalingFillPage makeRailcarMarshalingFail(RailcarMarshalingData data){
-        makeRailcarMarshaling(data);
+    @Story("make Railcar Marshaling Failure")
+    public RCMFillPage makeRCMFail(RCMData data){
+        fill(data);
         bSave.click();
         return this;
     }
 
-    public void makeRailcarMarshaling(RailcarMarshalingData data){
+    @Step("fill all data")
+    private void fill(RCMData data){
         number.sendKeysWithClear(data.number);
         track.sendKeysWithClear(data.RWTrack);
+        // select 1st available option from dropdown
+        // TODO: обернуть
         driver.findElement(By.cssSelector("td:nth-child(1)")).click();
         date.sendKeysWithClear(data.date);
         comment.sendKeysWithClear(data.comment);
     }
 
-    public RailcarMarshalingFillPage checkErrorMessages(){
+    public RCMFillPage checkErrorMessages(){
 
         errorMessages.clear();
 
