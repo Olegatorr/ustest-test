@@ -12,10 +12,18 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/** XmlParser handles parsing operation for XML */
 public class XmlParser {
+
+    /** 2 Maps for variables and words */
     public static Map<String,String> variables = new HashMap<>();
     public static Map<String,String> words = new HashMap<>();
 
+    /**
+     * Method which initializes parsing from XML to public maps
+     *
+     * @param file String - relative path to XML file
+     */
     public static void getData(File file) {
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -27,6 +35,10 @@ public class XmlParser {
         }
     }
 
+
+    /**
+     * Override of XMLHandler startElement, which triggers for every XML line
+     */
     static class XMLHandler extends DefaultHandler {
         @Override
         public void startElement(String uri, String localName, String qName, Attributes attributes) {

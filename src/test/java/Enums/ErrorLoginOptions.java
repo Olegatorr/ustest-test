@@ -2,6 +2,7 @@ package Enums;
 
 import Interfaces.Options;
 
+// TODO: add JavaDoc
 public enum ErrorLoginOptions implements Options {
     ERRORLOGIN("ErrorLogin");
 

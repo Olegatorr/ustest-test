@@ -1,6 +1,7 @@
 package base;
 
 import helpers.LanguageFactory;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeSuite;
 import java.util.concurrent.TimeUnit;
@@ -14,91 +15,97 @@ import parsers.XmlParser;
 
 import static browser.Browser.*;
 
+
+/**
+ * TestBase class, parent of all the test classes
+ * contains JUnit test preparation annotations
+ * and universal methods that are expected to be accessed from several test classes
+ */
 public class TestBase {
 
     public static WebDriver driver;
-    private String jsonPath = "./src/main/resources/JSON.json";
 
+
+    /**
+     * JUnit setup method
+     * runs ONCE before ALL the tests
+     */
     @BeforeSuite
     public void setUp() {
+        String jsonPath = "./src/main/resources/JSON.json";
         ConfigParser.getData(jsonPath);
+
         LanguageFactory.getData();
         driver = getInstance().driver;
         driver.manage().timeouts().implicitlyWait(ConfigParser.timeOutInSeconds, TimeUnit.SECONDS);
     }
-/*
+
+    /**
+     * JUnit afterMethod method
+     * runs after EVERY test method (test methods are annotated with @Test)
+     *
+     * @param result is automatically parsed by the test framework
+     *               contains last test data, which can be used
+     */
     @AfterMethod
     public void afterMethod(ITestResult result){
+        // check if last test was a failure
         if(result.getStatus() == ITestResult.FAILURE){
             onTestFailure(result);
         }
     }
-    */
 
-    // runs after ALL the tests
+    /**
+     * JUnit tearDown method
+     * runs ONCE after ALL the tests
+     */
     @AfterSuite
     public void tearDown(){
         driver.quit();
     }
-/*
-    // login to 7.1 EE
-    protected void login(LoginData loginData) {
 
-        driver.get("http://tos2.solvo.ru:37580/aet/login.xhtml");
-        driver.manage().window().setSize(new Dimension(1800, 1000));
-        driver.findElement(By.id("LoginForm:userid")).click();
-        driver.findElement(By.id("LoginForm:userid")).sendKeys(loginData.login);
-        driver.findElement(By.id("LoginForm:password")).sendKeys(loginData.password);
-        driver.findElement(By.id("LoginForm:language")).click();
-        driver.findElement(By.id("LoginForm:language_label")).click();
-        driver.findElement(By.id("LoginForm:language_0")).click();
-        driver.findElement(By.cssSelector(".ui-button-text:nth-child(2)")).click();
-
-        //in case of an existing active login we need to confirm login
-        try{
-            {
-                WebElement element = driver.findElement(By.cssSelector("#duplicateLoginForm\\3A duplicateLoginYesBtn > .ui-button-text"));
-                Actions builder = new Actions(driver);
-                builder.moveToElement(element).perform();
-            }
-            driver.findElement(By.cssSelector("#duplicateLoginForm\\3A duplicateLoginYesBtn > .ui-button-text")).click();
-            System.out.println("There was active login");
-        }catch (Exception e){
-            System.out.println("There was no active login");
-        }
-
-        //then wait for redirection to the main page to happen
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".worker-avatar-clip")));
-    }
-
-    protected void goToMainPage() {
-        driver.get("http://tos2.solvo.ru:37580/aet/private/main.xhtml");
-    }
-*/
-    protected void goToRailcarMarshaling(){
+    // TODO: move to RCM fill page
+    protected void goToRCM(){
+        // TODO: use config to get this URL
         driver.get("http://tos2.solvo.ru:37580/aet/private/rw_train_vizit.xhtml");
     }
 
+    // TODO: move to login page
     protected void goToLogin(){
         driver.get(ConfigParser.loginUrl);
     }
 
-    public void onTestFailure(ITestResult result){
-        System.out.println("*** Test execution " + result.getMethod().getMethodName() + " failed...");
-        System.out.println(result.getMethod().getMethodName() + " failed!");
 
+    /**
+     * Method which is needed to be called after every unexpected test failure
+     *
+     * @param result is automatically parsed by the test framework
+     *               contains last test data, which can be used
+     */
+    @Step("onTestFailure")
+    public void onTestFailure(ITestResult result){
+        System.out.println(result.getMethod().getMethodName() + " failed!");
         saveScreenshot(driver);
     }
 
+
+    /**
+     * @Attachment annotated methods are recognized by the test framework;
+     *               their return is automatically attached to Allure test report
+     * @param driver webDriver instance
+     * @return data to be attached to Allure test report
+     */
     @Attachment
     public byte[] saveScreenshot(WebDriver driver){
         return (((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES));
     }
 
+    // TODO: move to somewhere else
     protected void clickNew(){
         driver.findElement(By.cssSelector(".new")).click();
     }
 
+    // TODO: move to somewhere else
     protected void clickEdit(){
         driver.findElement(By.cssSelector(".new_config")).click();
         driver.findElement(By.cssSelector(".ui-menuitem-link .edit")).click();

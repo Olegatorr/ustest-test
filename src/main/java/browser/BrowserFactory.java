@@ -12,21 +12,34 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 
 import java.util.HashMap;
 
+/** BrowserFactory class handles different setting for different browsers */
 public class BrowserFactory {
 
+
+    /**
+     * Method for setting up a Chrome browser
+     *
+     * @return WebDriver for Chrome
+     */
     private static WebDriver chromeProperties() {
+
         HashMap<String, Object> chromePrefs = new HashMap<>();
         chromePrefs.put("download.default_directory", System.getProperty("user.dir"));
         chromePrefs.put("intl.accept_languages", ConfigParser.language);
         chromePrefs.put("safebrowsing.enabled", "true");
-        chromePrefs.put("safebrowsing.enabled", "true");
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("prefs", chromePrefs);
+
         WebDriverManager.chromedriver().setup();
         return new ChromeDriver(options);
 
     }
 
+    /**
+     * Method for setting up a Firefox browser
+     *
+     * @return WebDriver for Firefox
+     */
     private static WebDriver firefoxProperties() {
         FirefoxOptions options = new FirefoxOptions();
         FirefoxProfile profile = new FirefoxProfile();
@@ -39,6 +52,13 @@ public class BrowserFactory {
         return new FirefoxDriver(options);
     }
 
+
+    /**
+     * Getter for WebDriver
+     * reads preferred browser from config file, then applies corresponding settings and WebDriver via private methods
+     *
+     * @return WebDriver of preferred browser, if available
+     */
     public static WebDriver getDriver() {
         switch (ConfigParser.browserType) {
             case "Chrome":
