@@ -10,8 +10,13 @@ package pages;
         import org.openqa.selenium.support.ui.ExpectedConditions;
         import org.openqa.selenium.support.ui.Wait;
         import org.testng.Assert;
+		import Enums.RCMViewOptions;
+        import base.Field;
+        import helpers.LanguageFactory;
+        import helpers.XpathCreator;
+
         import base.PageBase;
-        import helpers.RailcarMarshalingData;
+
 
 public class RailcarMarshalingViewPage extends PageBase {
 
@@ -19,16 +24,16 @@ public class RailcarMarshalingViewPage extends PageBase {
     RailcarMarshalingData data;
     public String id;
 
-    private final Field number = new Field("/html/body/div[1]/div[2]/div[1]/div[2]/div[1]/div/div[1]/div[2]");
-    private final Field RWTrack = new Field("/html/body/div[1]/div[2]/div[1]/div[2]/div[1]/div/div[2]/div[2]/a");
-    private final Field date = new Field("/html/body/div[1]/div[2]/div[1]/div[2]/div[1]/div/div[3]/div[2]");
-    private final Field work = new Field("/html/body/div[1]/div[2]/div[1]/div[2]/div[1]/div/div[4]/div[2]");
-    private final Field comment = new Field("/html/body/div[1]/div[2]/div[1]/div[2]/div[1]/div/div[5]/div[2]");
+	private String template = "//*[@id=\"view_grid_content\"]/descendant::div[text()='%s']/following-sibling::div";
+    private final Field number = new Field(XpathCreator.createXpath(template, RCMViewOptions.NUMBER));
+    private final Field RWTrack = new Field(XpathCreator.createXpath(template, RCMViewOptions.RWTRACK));
+    private final Field date = new Field(XpathCreator.createXpath(template,RCMViewOptions.DATE));
+    private final Field work = new Field(XpathCreator.createXpath(template, RCMViewOptions.WORK));
+    private final Field comment = new Field(XpathCreator.createXpath(template, RCMViewOptions.COMMENTS));
 
     public RailcarMarshalingViewPage() {
         super();
         getId();
-        validateData();
     }
 
     public RailcarMarshalingViewPage(WebDriver driver, Wait<WebDriver> wait) {

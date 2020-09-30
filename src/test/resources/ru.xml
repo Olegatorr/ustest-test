@@ -1,0 +1,12 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<!DOCTYPE data>
+<data>
+    <words>
+        <word name="Number" value="Номер"/>
+        <word name="RWTrack" value="Путь"/>
+        <word name="Date" value="Дата подачи"/>
+        <word name="Work" value="Способ создания работ"/>
+        <word name="Comments" value="Примечания"/>
+        <word name="ErrorLogin" value="Неправильное"/>
+    </words>>
+</data>
