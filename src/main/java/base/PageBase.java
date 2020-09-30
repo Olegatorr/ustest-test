@@ -8,6 +8,7 @@ import waiting.WebDriverWaits;
 public class PageBase {
     public WebDriver driver;
     public String URL_MATCH ;
+
     public PageBase(String url) {
         driver = Browser.getInstance().driver;
         URL_MATCH = url;
