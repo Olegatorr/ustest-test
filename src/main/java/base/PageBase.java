@@ -8,16 +8,20 @@ import waiting.WebDriverWaits;
  * PageBase class - parent of all page objects
  * contains driver data and universal methods
  */
-public abstract class PageBase {
-
+public class PageBase {
     public WebDriver driver;
-    public abstract boolean isOpen();
+    public String URL_MATCH ;
 
-    /** Constructor */
-    public PageBase() {
+	/** Constructor */
+    public PageBase(String url) {
+
         driver = Browser.getInstance().driver;
+        URL_MATCH = url;
     }
 
+    public  boolean isOpen() {
+        return driver.getCurrentUrl().contains(URL_MATCH);
+    }
 
     /**
      * getCurrentUrl() returns current page URL

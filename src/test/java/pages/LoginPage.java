@@ -24,7 +24,6 @@ public class LoginPage extends PageBase {
     // TODO: parse url_match from json
     private final String URL_MATCH = "aet/login.xhtml";
 
-
     /** wrapped elements of the page */
     private final String errorLoginTemplate = "//span[contains(text(),'%s')]";
     private final BaseElement errorLogin = new BaseElement(XpathCreator.createXpath(errorLoginTemplate, ErrorLoginOptions.ERRORLOGIN));
@@ -34,22 +33,9 @@ public class LoginPage extends PageBase {
     private final Button bLogin = new Button("//*[@id=\"LoginForm:loginButton\"]");
     private final Button bConfirmLogin = new Button("//*[@id=\"duplicateLoginForm:duplicateLoginYesBtn\"]");
 
-
     /** Constructor */
     public LoginPage() {
-        super();
-    }
-
-    /**
-     * isOpen method indicates if this page object is loaded on the correct (corresponding) page
-     *
-     * @return boolean
-     * TRUE if we are on the intended page
-     * FALSE if we are on different page
-     */
-    @Override
-    public boolean isOpen() {
-        return driver.getCurrentUrl().contains(URL_MATCH);
+        super(URL_MATCH);
     }
 
     /**

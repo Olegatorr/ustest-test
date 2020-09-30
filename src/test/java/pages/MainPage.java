@@ -9,7 +9,7 @@ public class MainPage extends PageBase {
 
     /** URL_MATCH contains part of the UPL which is unique for this page */
     // TODO: parse url_match from json
-    String URL_MATCH = "private/main.xhtml";
+    private static String URL_MATCH = "private/main.xhtml";
 
     /** avatar is the page element, presence of which indicates if we are on the main page*/
     // TODO: ужасный xpath, подумать (лучше придумать способ уникально идентифицировать mainPage (avatar - неуникален) )
@@ -19,21 +19,7 @@ public class MainPage extends PageBase {
      * Constructor
      */
     public MainPage() {
-        super();
+        super(URL_MATCH);
         pageOpenWait(avatar);
     }
-
-
-    /**
-     * isOpen method indicates if this page object is loaded on the correct (corresponding) page
-     *
-     * @return boolean
-     * TRUE if we are on the intended page
-     * FALSE if we are on different page
-     */
-    @Override
-    public boolean isOpen() {
-        return driver.getCurrentUrl().contains(URL_MATCH);
-    }
-
 }
