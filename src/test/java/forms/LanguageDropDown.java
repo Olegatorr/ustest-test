@@ -8,7 +8,6 @@ import java.util.Random;
 
 public class LanguageDropDown {
     protected BaseElement element ;
-    protected BaseElement optionElement;
     protected ListBaseElement options;
     String optionTemplate = "//*[@id=\"LoginForm:language_%s\"] ";
 

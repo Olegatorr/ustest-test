@@ -5,7 +5,6 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import base.TestBase;
 import helpers.RailcarMarshalingData;
-import pages.MainPage;
 import pages.RailcarMarshalingFillPage;
 import pages.RailcarMarshalingViewPage;
 
@@ -13,8 +12,13 @@ public class RailcarMarshalingCreateTestsPositive extends TestBase {
 
     RailcarMarshalingFillPage railcarMarshalingFillPage;
     RailcarMarshalingViewPage railcarMarshalingViewPage;
-    MainPage mainPage;
     RailcarMarshalingData data;
+
+    @BeforeClass
+    public void setup() {
+        data = RailcarMarshalingData.createValidData();
+    }
+
 
     @Story("positive create Railcar Marshaling")
     @Test (priority = 1)
@@ -22,7 +26,6 @@ public class RailcarMarshalingCreateTestsPositive extends TestBase {
         goToRailcarMarshaling();
         clickNew();
         railcarMarshalingFillPage = new RailcarMarshalingFillPage();
-        data = RailcarMarshalingData.createValidData();
         // create RWM, expecting a success
         railcarMarshalingViewPage = railcarMarshalingFillPage.makeRailcarMarshalingSuccess(data);
         Assert.assertTrue(railcarMarshalingViewPage.isOpen());
@@ -34,7 +37,6 @@ public class RailcarMarshalingCreateTestsPositive extends TestBase {
     public void EditRailcarMarshalingPositive(){
         //assuming we are on the same RWM page
         clickEdit();
-        data = RailcarMarshalingData.createValidData();
         railcarMarshalingFillPage.makeRailcarMarshalingSuccess(data);
     }
 }
