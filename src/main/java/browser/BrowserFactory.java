@@ -12,8 +12,15 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 
 import java.util.HashMap;
 
+/** BrowserFactory class handles different setting for different browsers */
 public class BrowserFactory {
 
+
+    /**
+     * Method for setting up a Chrome browser
+     *
+     * @return WebDriver for Chrome
+     */
     private static WebDriver chromeProperties() {
 
         HashMap<String, Object> chromePrefs = new HashMap<>();
@@ -28,6 +35,11 @@ public class BrowserFactory {
 
     }
 
+    /**
+     * Method for setting up a Firefox browser
+     *
+     * @return WebDriver for Firefox
+     */
     private static WebDriver firefoxProperties() {
         FirefoxOptions options = new FirefoxOptions();
         FirefoxProfile profile = new FirefoxProfile();
@@ -40,6 +52,13 @@ public class BrowserFactory {
         return new FirefoxDriver(options);
     }
 
+
+    /**
+     * Getter for WebDriver
+     * reads preferred browser from config file, then applies corresponding settings and WebDriver via private methods
+     *
+     * @return WebDriver of preferred browser, if available
+     */
     public static WebDriver getDriver() {
         switch (ConfigParser.browserType) {
             case "Chrome":

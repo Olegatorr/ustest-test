@@ -8,10 +8,48 @@ import helpers.RCMData;
 import pages.RCMFillPage;
 import pages.RCMViewPage;
 
+/**
+ * Test class for RCM body positive tests
+ *
+ * Example loginNegativeWrongLogin():
+ *
+ * goToRCM();
+ * open RCM page
+ *
+ * clickNew();
+ * click New RCM on the RCM view page
+ *
+ * RCMFillPage fillPage = new RCMFillPage();
+ * create new fillPage page object
+ *
+ * data = RCMData.createValidData();
+ * create new RCMData object (contains String for all the fields)
+ *
+ * RCMViewPage viewPage = fillPage.makeRCMSuccess(data);
+ * call makeRCMSuccess method of fillPage page object
+ * fill the fields using RCMData and submit the RCM
+ * since RCM creation is expected to succeed, viewPage object is returned
+ *
+ * Assert.assertTrue(viewPage.isOpen());
+ * check if the viewPage page is open
+ *
+ * viewPage.validateData(data);
+ * validate data on the page
+ * compares data on the page with data we entered while creating RCM
+ */
 public class RCMCreateTestsPositive extends TestBase {
 
+
+    /**
+     * RCM data object
+     * Contains String data for all the fields
+     */
     RCMData data;
 
+    /**
+     *  Positive test of RCM body creation
+     *  RCM is expected to be successfully created
+     */
     @Story("positive create Railcar Marshaling")
     @Test (priority = 1)
     public void CreateRailcarMarshalingPositive() {
@@ -27,7 +65,10 @@ public class RCMCreateTestsPositive extends TestBase {
 
     }
 
-
+    /**
+     *  Positive test of RCM body edit
+     *  RCM is expected to be successfully edited
+     */
     @Story("positive edit Railcar Marshaling")
     @Test (priority = 2)
     public void EditRailcarMarshalingPositive(){
